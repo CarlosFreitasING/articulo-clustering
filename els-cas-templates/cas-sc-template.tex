@@ -291,7 +291,7 @@ A avaliação dos modelos de aprendizagem não supervisionada foi realizada reco
 A Figura \ref{fig:methodological_workflow} apresenta uma visão global da metodologia seguida neste trabalho. Após a recolha dos sinais fisiológicos através do dispositivo Empatica EmbracePlus, os diferentes ficheiros foram integrados e submetidos a um processo de pré-processamento, incluindo seleção de variáveis, tratamento de valores em falta, codificação das variáveis categóricas e normalização. Em seguida, foram gerados dois conjuntos de dados com diferentes resoluções temporais (1 minuto e janelas de 10 minutos), utilizados para treinar e comparar os algoritmos Gaussian Mixture Models e Clustering Hierárquico Aglomerativo. Finalmente, os clusters obtidos foram interpretados através de um modelo de Árvore de Decisão, permitindo extrair regras compreensíveis para a sua integração numa plataforma de Gémeo Digital Humano.
 
 \begin{center}
-  \includegraphics[width=1\linewidth]{figs/arquitecture.png}
+  \includegraphics[width=1\linewidth]{figs/Figure_1.png}
   \captionof{figure}{Fluxo metodológico do estudo.}
   \label{fig:methodological_workflow}
 \end{center}
@@ -340,13 +340,13 @@ Para os dados agregados através de janelas temporais de 10 minutos, o GMM selec
 \begin{center}
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figs/BICoriginal.png}
+    \includegraphics[width=\textwidth]{figs/Figure_2.png}
     \centerline{(a) Dados Originais (ao minuto)}
   \end{minipage}
   \hfill
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figs/BICjanela.png}
+    \includegraphics[width=\textwidth]{figs/Figure_3.png}
     \centerline{(b) Janelas de 10 Minutos}
   \end{minipage}
   \captionof{figure}{Curvas do Bayesian Information Criterion (BIC) obtidas para o modelo GMM.}
@@ -360,13 +360,13 @@ As Figuras \ref{fig:elbow_curves}(a) e \ref{fig:elbow_curves}(b) apresentam as c
 \begin{center}
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figs/cotoveloOriginal.png}
+    \includegraphics[width=\textwidth]{figs/Figure_4.png}
     \centerline{(a) Curva do Cotovelo (1 min bruto)}
   \end{minipage}
   \hfill
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figs/cotoveloJanela.png}
+    \includegraphics[width=\textwidth]{figs/Figure_5.png}
     \centerline{(b) Curva do Cotovelo (10 min suavizado)}
   \end{minipage}
   \captionof{figure}{Curvas do método do cotovelo para o Clustering Hierárquico Aglomerativo.}  \label{fig:elbow_curves}
@@ -377,13 +377,13 @@ As curvas apresentadas nas Figuras \ref{fig:silhouette_curves}(a) e \ref{fig:sil
 \begin{center}
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figs/silhouetteOriginal.png}
+    \includegraphics[width=\textwidth]{figs/Figure_6.png}
     \centerline{(a) Dados originais (1 minuto)}
   \end{minipage}
   \hfill
   \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{figs/silhouetteJanela.png}
+    \includegraphics[width=\textwidth]{figs/Figure_7.png}
     \centerline{(b) Dados agregados (10 minutos)}
   \end{minipage}
   \captionof{figure}{Evolução do índice de \textit{Silhouette} para diferentes valores de $k$.}  \label{fig:silhouette_curves}
@@ -394,13 +394,13 @@ As Figuras \ref{fig:dendrogram_original} e \ref{fig:dendrogram_window} apresenta
 Além de fornecer informação sobre a estrutura hierárquica, os dendrogramas permitem avaliar visualmente diferentes valores de $k$ através da seleção de um nível de corte. Nos dados originais, um corte situado em torno de uma distância de 100 gera uma separação muito geral em dois grandes grupos, enquanto um corte próximo de uma distância de 40 permite obter cinco agrupamentos distintos. Esta última configuração proporciona uma segmentação suficientemente detalhada, sem atingir o nível de fragmentação associado a soluções com um número elevado de clusters. Deste modo, o dendrograma fornece evidência visual adicional que complementa os resultados obtidos através do método do cotovelo e do índice de \textit{Silhouette}.
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figs/dendrogamaOriginal.png}
+  \includegraphics[width=0.95\textwidth]{figs/Figure_8.png}
   \captionof{figure}{Dendrograma do Clustering Hierárquico Aglomerativo para os dados originais.}
   \label{fig:dendrogram_original}
 \end{center}
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figs/dendrogamaJanela.png}
+  \includegraphics[width=0.95\textwidth]{figs/Figure_9.png}
   \captionof{figure}{Dendrograma do Clustering Hierárquico Aglomerativo em janelas de 10 minutos.}
   \label{fig:dendrogram_window}
 \end{center}
@@ -436,13 +436,13 @@ Na representação agregada em janelas de 10 minutos, a árvore apresentou uma p
 A Figura \ref{fig:arvore_jerarquico_original} apresenta a árvore obtida para os dados originais, enquanto a Figura \ref{fig:arvore_jerarquico_window} apresenta a correspondente estrutura para as janelas temporais de 10 minutos. As regras extraídas mostram que, na resolução de um minuto, a distinção entre clusters é inicialmente condicionada pelo estágio de sono e pelo nível de atividade, sendo posteriormente refinada por variáveis relacionadas com movimento e resposta fisiológica. Após a agregação temporal, a lógica de decisão passa a depender principalmente de medidas mais estáveis do comportamento, como a permanência em estado estático, o número de passos e a ocorrência de caminhada. As regras de decisão detalhadas para os dados originais e para as janelas de 10 minutos são apresentadas, respetivamente, nas Tabelas \ref{tab:regras_originais} e \ref{tab:regras_janelas}.
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figs/jerarquico1min.png}
+  \includegraphics[width=0.95\textwidth]{figs/Figure_10.png}
   \captionof{figure}{Árvore de Decisão para dados com resolução de um minuto.}
   \label{fig:arvore_jerarquico_original}
 \end{center}
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figs/jerarquico10min.png}
+  \includegraphics[width=0.95\textwidth]{figs/Figure_11.png}
   \captionof{figure}{Árvore de Decisão para dados agregados em janelas de 10 minutos.}
   \label{fig:arvore_jerarquico_window}
 \end{center}
@@ -546,7 +546,7 @@ A análise da Tabela \ref{tab:percentis_gmm_original} mostra que, embora os nove
 A distribuição temporal apresentada na Figura \ref{fig:temporal_gmm_original} permite complementar esta caracterização, mostrando como os diferentes agrupamentos se sucedem ao longo das 24 horas.
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figs/temporalgmmoriginal.png}
+  \includegraphics[width=0.95\textwidth]{figs/Figure_12.png}
   \captionof{figure}{Distribuição temporal diária dos clusters do GMM com dados de um minuto.}
     \label{fig:temporal_gmm_original}
 \end{center}
@@ -581,7 +581,7 @@ Os cinco agrupamentos apresentam assinaturas fisiológicas distintas e permitem 
 A distribuição temporal destes agrupamentos ao longo da jornada é apresentada na Figura \ref{fig:temporal_gmm_janela}.
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figs/temporalgmmjanela.png}
+  \includegraphics[width=0.95\textwidth]{figs/Figure_13.png}
   \captionof{figure}{Daily temporal distribution of the GMM clusters ($k=5$, 10-minute windows) throughout a workday.}
     \label{fig:temporal_gmm_janela}
 \end{center}
@@ -617,7 +617,7 @@ A análise das assinaturas permite identificar estados associados ao repouso, à
 A distribuição temporal dos agrupamentos ao longo da jornada é apresentada na Figura \ref{fig:temporal_hier_original}.
 
 \begin{center}
-\includegraphics[width=0.95\textwidth]{figs/temporalherarquicooriginal.png}
+\includegraphics[width=0.95\textwidth]{figs/Figure_14.png}
 \captionof{figure}{Distribuição temporal diária dos clusters do Clustering Hierárquico ($k=5$, dados ao minuto) ao longo de uma jornada.}
 \label{fig:temporal_hier_original}
 \end{center}
@@ -653,7 +653,7 @@ Os agrupamentos apresentam assinaturas fisiológicas diferenciadas. O cluster \t
 A distribuição temporal dos clusters ao longo da jornada é apresentada na Figura \ref{fig:temporal_hier_janela}.
 
 \begin{center}
-\includegraphics[width=0.95\textwidth]{figs/temporalherarquicojanela.png}
+\includegraphics[width=0.95\textwidth]{figs/Figure_15.png}
 \captionof{figure}{Distribuição temporal diária dos clusters do Clustering Hierárquico ($k=5$, janelas de 10 min) ao longo de uma jornada.}
 \label{fig:temporal_hier_janela}
 \end{center}
@@ -669,6 +669,29 @@ Para garantir a consistência entre a fase de treino e a validação externa, os
 A avaliação foi realizada com base na interpretação fisiológica previamente atribuída a cada \textit{cluster}. Para cada modelo, foram definidos os \textit{clusters} considerados compatíveis com cada atividade experimental. Por exemplo, no GMM com $k=9$, os \textit{clusters} 0 e 5 foram associados ao sono profundo, os \textit{clusters} 3, 4 e 8 à atividade física e os \textit{clusters} 2, 6 e 7 ao trabalho ou concentração. Assim, uma previsão pertencente a qualquer um dos \textit{clusters} esperados para uma determinada atividade foi considerada uma classificação correta, enquanto uma previsão fora desse conjunto foi considerada incorreta. Este procedimento permite transformar a atribuição não supervisionada dos \textit{clusters} numa medida de concordância entre o estado fisiológico esperado e o estado identificado pelo modelo.
 
 Os resultados obtidos evidenciam diferenças importantes entre as configurações avaliadas. Para os dados originais, o GMM apresentou uma \textit{accuracy} de 75,17\% para a atividade física e de 82,64\% para o trabalho em computador, enquanto no período de sono a \textit{accuracy} foi de 46,09\%. No Clustering Hierárquico, observaram-se valores de 59,73\% para a atividade física, 81,82\% para o trabalho em computador e 93,04\% para o sono. Estes resultados mostram que, embora o GMM tenha apresentado uma resposta competitiva na identificação da atividade física e do trabalho, o modelo hierárquico apresentou uma capacidade claramente superior para reconhecer o período de sono.
+
+As Figuras~\ref{fig:external_gmm_pc}, \ref{fig:external_gmm_exercise} e \ref{fig:external_gmm_sleep} apresentam, respetivamente, a distribuição temporal das previsões obtidas pelo GMM com dados originais ($k=9$) durante o sono, o trabalho em computador e a atividade física. Os pontos verdes representam previsões pertencentes aos \textit{clusters} considerados compatíveis com a atividade experimental, enquanto os pontos vermelhos correspondem a previsões fora dos \textit{clusters} esperados. Esta representação permite observar não apenas a \textit{accuracy} global, mas também a distribuição temporal dos acertos e erros ao longo de cada período experimental. No caso do trabalho em computador, observa-se uma predominância de previsões no \textit{cluster} associado à atividade de trabalho ou concentração, em concordância com a \textit{accuracy} de 82,64\%. Na atividade física, a maior parte das previsões concentra-se nos \textit{clusters} associados à atividade física, embora ocorram períodos de classificação em estados relacionados com trabalho ou concentração. Já durante o sono, apesar da presença prolongada de previsões no \textit{cluster} 0, verifica-se uma quantidade considerável de classificações em estados não associados ao sono profundo, o que é consistente com a menor \textit{accuracy} observada para esta condição.
+
+\begin{center}
+    \centering
+  \includegraphics[width=0.95\textwidth]{figs/Figure_17.png}
+    \captionof{figure}{Distribuição temporal das previsões do GMM ($k=9$) durante o trabalho em computador.}
+    \label{fig:external_gmm_pc}
+\end{center}
+
+\begin{center}
+    \centering
+  \includegraphics[width=0.95\textwidth]{figs/Figure_18.png}
+    \captionof{figure}{Distribuição temporal das previsões do GMM ($k=9$) durante a atividade física.}
+    \label{fig:external_gmm_exercise}
+\end{center}
+
+\begin{center}
+    \centering
+  \includegraphics[width=0.95\textwidth]{figs/Figure_16.png}
+    \captionof{figure}{Distribuição temporal das previsões do GMM ($k=9$) durante o período de sono.}
+    \label{fig:external_gmm_sleep}
+\end{center}
 
 Nos modelos baseados em janelas temporais de 10 minutos, o GMM apresentou uma \textit{accuracy} de 26,67\% para a atividade física, 76,92\% para o trabalho em computador e 51,43\% para o sono. O Clustering Hierárquico apresentou resultados bastante distintos: 0,00\% para a atividade física, 23,08\% para o trabalho em computador e 100,00\% para o sono. Estes resultados indicam que a agregação temporal não produziu uma melhoria uniforme no reconhecimento das atividades. No caso do sono, a representação em janelas favoreceu claramente o Clustering Hierárquico, que classificou corretamente todas as 35 janelas avaliadas. Por outro lado, a mesma representação apresentou dificuldades significativas na identificação da atividade física e do trabalho em computador, especialmente no modelo hierárquico.
 
