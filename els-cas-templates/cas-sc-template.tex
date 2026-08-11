@@ -1,0 +1,761 @@
+%% 
+%% Copyright 2019-2024 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3c of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-sc documentclass for 
+%% double column output.
+
+\documentclass[a4paper,fleqn]{cas-sc}
+
+% If the frontmatter runs over more than one page
+% use the longmktitle option.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
+
+%\usepackage[numbers]{natbib}
+%\usepackage[authoryear]{natbib}
+\usepackage[authoryear,longnamesfirst]{natbib}
+\usepackage{subcaption}
+\usepackage{siunitx}
+\usepackage{float}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+% Uncomment and use as if needed
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newdefinition{rmk}{Remark}
+%\newproof{pf}{Proof}
+%\newproof{pot}{Proof of Theorem \ref{thm}}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title
+\shorttitle{Unsupervised Fatigue Monitoring in Construction}    
+
+% Short author
+\shortauthors{C. Teixeira et al.}  
+
+% Main title of the paper
+\title [mode = title]{Unsupervised Physiological State Clustering for Construction Workers' Fatigue Monitoring: A Human-Centric IoT Approach}  
+
+% Title footnote mark
+% eg: \tnotemark[1]
+\tnotemark[1] 
+
+% Title footnote 1.
+% eg: \tnotetext[1]{Title footnote text}
+\tnotetext[1]{This work was supported by the CRIARTE project (Construção com Robótica Inteligente e Arquitetura Revolucionária de Tecnologias Emergentes).} 
+
+% First author
+\author[1]{Carlos Alejandro Freitas Teixeira}[orcid=0009-0006-4081-0640]
+
+% Corresponding author indication
+\cormark[1]
+
+% Footnote of the first author
+\fnmark[1]
+
+% Email id of the first author
+\ead{cafrt@isep.ipp.pt}
+
+% Second author
+\author[1]{Diogo Emanuel Pereira Martinho}[orcid=0000-0003-1683-4950]
+\fnmark[2]
+
+% Email id of the second author
+\ead{dep@isep.ipp.pt}
+
+% Third author
+\author[1]{Maria Goreti Marreiros}[orcid=0000-0003-4417-8401]
+\fnmark[3]
+
+% Email id of the third author
+\ead{mgt@isep.ipp.pt}
+
+% Fourth author
+\author[2]{Rui Barros Garcia}[orcid=0009-0008-4209-0493]
+
+% Email id of the fourth author
+\ead{uibarrosgarcia@garcia.pt}
+
+% Address/affiliation
+\affiliation[1]{organization={GECAD, ISEP, Polytechnic of Porto},
+            city={Porto},
+            country={Portugal}}
+\affiliation[2]{organization={Garcia, Garcia S.A.},
+            country={Portugal}}
+
+% Corresponding author text
+\cortext[cor1]{Corresponding author}
+
+% Footnote text (removed empty placeholders)
+%\fntext[fn1]{First author footnote.}
+%\fntext[fn2]{Second author footnote.}
+%\fntext[fn3]{Third author footnote.}
+
+% For a title note without a number/mark
+%\nonumnote{}
+
+% Here goes the abstract
+\begin{abstract}
+Este estudo avalia a utilização de aprendizagem não supervisionada para identificar padrões fisiológicos associados à fadiga em trabalhadores da construção, recorrendo a dados multimodais recolhidos pelo Empatica EmbracePlus. Foram comparados Gaussian Mixture Models (GMM) e Clustering Hierárquico Aglomerativo em dados com resolução de um minuto e em janelas temporais de 10 minutos. A seleção e interpretação dos agrupamentos basearam-se no BIC, no índice de Silhouette, no método do cotovelo, em dendrogramas e em Árvores de Decisão. A agregação temporal aumentou o índice de Silhouette do GMM de 0,3475 para 0,3742 e do modelo hierárquico de 0,3959 para 0,4132. A solução hierárquica com janelas apresentou a melhor identificação do sono na validação externa (100,00\%), mas teve desempenho nulo na atividade física; nos dados originais, o GMM obteve 75,17\% na atividade física e 82,64\% no trabalho em computador. As Árvores de Decisão reproduziram os agrupamentos com 92,01\% de accuracy em validação cruzada para os dados originais e 83,92\% para as janelas. Os resultados indicam que os agrupamentos podem representar padrões compatíveis com repouso, atividade, carga cognitiva e esforço físico, mas o desempenho depende do algoritmo, da resolução temporal e da situação avaliada. A abordagem demonstra potencial para apoiar a monitorização fisiológica, embora sejam necessários conjuntos de dados maiores e validação prospetiva antes de qualquer utilização operacional.
+\end{abstract}
+
+% Use if graphical abstract is present
+%\begin{graphicalabstract}
+%\includegraphics{}
+%\end{graphicalabstract}
+
+% Research highlights
+\begin{highlights}
+\item Clustering não supervisionado identificou estados de fadiga e repouso.
+\item GMM e clustering hierárquico foram comparados ao minuto e em janelas.
+\item Silhouette, BIC e interpretação fisiológica orientaram os clusters.
+\item Dados originais captaram melhor a atividade dinâmica.
+\item Validação externa revelou diferenças entre exercício, PC e sono.
+\end{highlights}
+
+
+% KeywordsX X
+% Each keyword is seperated by \sep
+\begin{keywords}
+Segurança Ocupacional \sep Fadiga Física \sep Clustering Não Supervisionado \sep Gaussian Mixture Model \sep Wearable IoT \sep Indústria 5.0
+\end{keywords}
+
+\maketitle
+
+% Main text
+\section{Introdução}\label{sec:intro}
+
+O panorama industrial moderno atravessa uma profunda mudança de paradigma impulsionada pelo surgimento da Indústria 5.0. Ao contrário da sua antecessora, centrada na tecnologia, a Indústria 5.0 promove um modelo industrial centrado no ser humano, na sustentabilidade e na resiliência, colocando as necessidades, preferências e o bem-estar dos trabalhadores no centro dos processos produtivos e operacionais, numa transição de um paradigma impulsionado pela tecnologia para outro orientado para as pessoas e para a sociedade \cite{Leng2024}. Em setores altamente intensivos em mão de obra e inerentemente perigosos, como a construção, esta abordagem centrada no trabalhador reveste-se de importância primordial. A indústria da construção regista de forma consistente algumas das taxas mais elevadas de acidentes de trabalho, lesões e fatalidades a nível mundial, sendo a fadiga física severa, a privação de sono e o stress térmico ambiental extremo os principais catalisadores de incidentes laborais. A fadiga não gerida degrada gravemente o desempenho cognitivo, os tempos de reação e a consciência situacional, tornando o trabalho físico em zonas de elevado risco (como andaimes ou operações com maquinaria pesada) altamente perigoso.
+
+Este estudo enquadra-se no projeto CRIARTE \textit{(Construção com Robótica Inteligente e Arquitetura Revolucionária de Tecnologias Emergentes / Construction with Intelligent Robotics and Revolutionary Architecture of Emerging Technologies)} \cite{criarte_pt2030_2024}, um projeto de investigação e desenvolvimento cujo objetivo é promover ambientes de construção mais seguros através da integração de robótica avançada, Internet das Coisas (IoT), inteligência artificial (IA) e Gémeos Digitais Humanos (HDT). Neste contexto, um dos principais desafios consiste em monitorizar de forma contínua e em tempo real o estado fisiológico dos trabalhadores, de modo a detetar condições que possam comprometer a sua saúde e segurança durante a jornada de trabalho.
+
+Tradicionalmente, a fadiga física tem sido avaliada \textit{a posteriori} através de escalas subjetivas, como a escala de Borg RPE ou os questionários Samn-Perelli, ferramentas que requerem a intervenção do trabalhador, interrompem o desenvolvimento da atividade e estão sujeitas ao enviesamento inerente ao autorrelato. Como alternativa, as abordagens baseadas em aprendizagem automática supervisionada demonstraram uma elevada capacidade para classificar estados de fadiga a partir de sinais fisiológicos de alta resolução, especialmente os obtidos através de eletrocardiogramas (ECG). No entanto, a sua aplicação em ambientes reais de construção apresenta limitações significativas. Por um lado, a obtenção de dados etiquetados revela-se particularmente complexa, uma vez que os trabalhadores não podem fornecer avaliações contínuas durante a execução das suas tarefas, dificultando a criação de conjuntos de dados representativos. Por outro lado, os dispositivos de aquisição de alta precisão, como as cintas torácicas de ECG, podem ser desconfortáveis para uma utilização prolongada, restringir parcialmente os movimentos e reduzir a aceitação por parte dos trabalhadores. Em contrapartida, os dispositivos \textit{wearables} de pulso, como o Empatica EmbracePlus \cite{empatica_embraceplus}, constituem uma alternativa muito mais prática e adequada para a monitorização contínua, embora os sinais que produzem sejam frequentemente afetados por ruído, artefactos de movimento e pela ausência de etiquetas que permitam treinar modelos supervisionados.
+
+Com o objetivo de ultrapassar estas limitações, este trabalho propõe uma abordagem de aprendizagem automática não supervisionada baseada em técnicas de \textit{clustering}, orientada para identificar estados fisiológicos naturais e recorrentes sem necessidade de dispor de etiquetas manuais. Para esse efeito, são analisados diferentes sinais fisiológicos registados por dispositivos \textit{wearables} de pulso, incluindo a Atividade Eletrodérmica (EDA), a Frequência de Pulso (PR), a Temperatura da Pele e diversos indicadores de atividade metabólica, como os METs e as Contagens de Atividade, entre outros.
+
+Para validar a abordagem proposta, neste trabalho são investigados dois algoritmos de \textit{clustering}: Gaussian Mixture Models (GMM), capazes de modelar pertenças probabilísticas adequadas a transições fisiológicas graduais, e o Clustering Hierárquico Aglomerativo, capaz de identificar estruturas hierárquicas e agrupamentos naturais nos dados com base em medidas de similaridade entre as observações. Além disso, com o objetivo de mitigar o ruído de alta frequência e os artefactos de movimento inerentes aos dispositivos \textit{wearables} de pulso utilizados em ambientes de construção, compara-se o desempenho obtido com sinais brutos de 1 minuto e com sinais suavizados através de uma janela móvel de 10 minutos. A avaliação experimental demonstra que a estratégia de suavização temporal através de janelas melhora o índice de Silhouette, refletindo uma maior qualidade e coesão dos clusters obtidos. Por fim, com o objetivo de estabelecer uma ligação entre os clusters identificados e a sua interpretação no contexto da segurança ocupacional, são treinadas Árvores de Decisão interpretáveis para extrair regras de decisão explícitas e facilmente compreensíveis. Estas regras alcançaram uma precisão superior a 92\%, demonstrando constituir uma base sólida para a implementação de mecanismos automáticos de deteção de risco numa plataforma de Gémeo Digital Humano.
+
+\section{Trabalho Relacionado / Estado da Arte}\label{sec:related}
+\textit{[IN PROGRESS]}\\
+%A interseção entre biossensores vestíveis e deteção automatizada de fadiga tem conhecido uma aceleração rápida. Numerosos estudos exploraram diferentes combinações de tipos de sensores e escolhas algorítmicas para classificar a carga física e cognitiva ocupacional. Para mapear as abordagens existentes e situar o nosso estudo na literatura atual, realizámos uma revisão bibliográfica sistemática com base na declaração Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA), visando estudos publicados entre 2020 e 2025 em bases de dados como PubMed, IEEE Xplore e ScienceDirect. Dos 124 registos iniciais identificados, um processo rigoroso de triagem em múltiplas etapas (centrado em sensores fisiológicos vestíveis, ambientes de construção e aprendizagem automática) resultou em 37 estudos nucleares, com um subconjunto de 12 a receber as pontuações máximas de elegibilidade e qualidade.
+%Um estrangulamento técnico observado na literatura é a forte dependência de arquiteturas de classificadores supervisionados (p.ex., Support Vector Machines, Random Forests e XGBoost) treinadas em conjuntos de dados laboratoriais de grau clínico \cite{karim2025, goutham2025}. Embora estas arquiteturas produzam elevadas precisões em ambientes simulados, sofrem de fraca generalização quando implantadas em estaleiros reais devido a desvios de domínio (diferentes condições térmicas e de carga) e à enorme dificuldade em obter anotações de etiquetas \cite{anjum2025}. Alguns trabalhos recentes tentaram utilizar clustering não supervisionado (como K-Means ou DBSCAN) para analisar níveis de atividade humana. Contudo, raramente incorporam marcadores fisiológicos multidimensionais profundos (acoplando EDA, temperatura e sinais cardíacos) para identificar estados discretos de fadiga do trabalhador. O nosso trabalho aborda diretamente esta lacuna crítica ao implementar um enquadramento robusto e totalmente não supervisionado que utiliza sinais multimodais de smartwatches vestíveis do dia a dia e, em seguida, constrói um mecanismo de interpretação para traduzir clusters em regras clínicas de segurança.
+
+\section{Metodologia}\label{sec:method}
+
+A metodologia proposta neste trabalho encontra-se organizada em cinco etapas principais. Inicialmente, descreve-se o protocolo de recolha de dados e as características do conjunto de dados utilizado. De seguida, apresentam-se os procedimentos de pré-processamento aplicados aos sinais fisiológicos, incluindo a preparação das variáveis para a aprendizagem automática. Posteriormente, é descrita a metodologia de \textit{clustering} adotada e a configuração experimental dos modelos. Por fim, são apresentados os critérios utilizados para a avaliação das diferentes abordagens, cujos resultados são discutidos na secção seguinte.
+
+\subsection{Protocolo de Recolha de Dados}
+Os dados utilizados neste estudo foram recolhidos no âmbito do projeto \textbf{CRIARTE} \textit{(Construção com Robótica Inteligente e Arquitetura Revolucionária de Tecnologias Emergentes / Construction with Intelligent Robotics and Revolutionary Architecture of Emerging Technologies)}, uma iniciativa de investigação orientada para melhorar a segurança em ambientes de construção através da utilização de tecnologias digitais avançadas. A aquisição dos dados foi realizada durante jornadas reais de trabalho, nas quais os participantes executaram atividades típicas do setor da construção, envolvendo diferentes níveis de esforço físico e interação com equipamentos e maquinaria, permitindo recolher sinais fisiológicos em condições representativas de um ambiente operacional real.
+
+A recolha de dados pelo projeto CRIARTE foi realizada segundo os princípios da licitude, lealdade e transparência, garantindo o consentimento informado explícito de todos os trabalhadores participantes. Em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD) e tendo em consideração as orientações aplicáveis do AI Act, o protocolo adotou também o princípio da minimização dos dados, assegurando que apenas eram tratados os dados estritamente necessários para a monitorização fisiológica e para a segurança laboral. Foram ainda aplicados procedimentos de anonimização e pseudonimização, de modo a reforçar a proteção da privacidade dos participantes e a limitar os riscos associados ao tratamento da informação recolhida.
+
+Para a monitorização fisiológica, foi utilizado o dispositivo \textit{wearable} de pulso Empatica EmbracePlus \cite{empatica_embraceplus}, cujos registos foram exportados em formato CSV com uma resolução temporal de um minuto. O conjunto de dados gerado por este dispositivo é composto por 22 variáveis fisiológicas e de atividade, incluindo a atividade eletrodérmica (\texttt{eda\_scl\_usiemens}), a frequência de pulso (\texttt{pulse\_rate\_bpm}), a frequência respiratória (\texttt{respiratory\_rate\_brpm}), a variabilidade da frequência cardíaca (\texttt{prv\_rmssd\_ms}), o gasto energético metabólico (\texttt{met}), as contagens de atividade (\texttt{activity\_counts}), o número de passos (\texttt{step\_counts}), a magnitude do vetor de movimento (\texttt{vector\_magnitude}), a classificação do tipo de atividade (\texttt{activity\_class}), a intensidade da atividade (\texttt{activity\_intensity}) e a deteção das diferentes fases do sono (\texttt{sleep\_detection\_stage}), além de outros indicadores fisiológicos e de movimento disponibilizados pelo dispositivo.
+
+Os dados de cada trabalhador encontram-se organizados por dia de recolha, sendo cada ficheiro CSV constituído por registos temporais com uma resolução de um minuto. Consequentemente, um dia completo de monitorização corresponde, em condições ideais, a aproximadamente 1440 registos ($24 \times 60$), contendo os valores das variáveis fisiológicas e de atividade transmitidas pelo dispositivo em cada instante. Este número deve ser entendido como uma referência teórica, uma vez que podem ocorrer períodos sem registo, perdas de comunicação, ausência de utilização do dispositivo ou valores em falta durante a aquisição.
+
+\subsection{Conjunto de Variáveis Fisiológicas}
+
+O smartwatch de grau médico Empatica EmbracePlus, utilizado neste estudo, disponibiliza múltiplos sinais fisiológicos e de atividade, registados de forma contínua, organizados em ficheiros independentes para cada tipo de sinal e posteriormente integrados num único conjunto de dados para análise. O conjunto de dados consolidado inclui variáveis temporais, biomarcadores fisiológicos, indicadores de atividade física e colunas destinadas a identificar possíveis valores ausentes durante o processo de aquisição.
+
+Entre as variáveis fisiológicas disponíveis encontram-se a atividade eletrodérmica (\texttt{eda}), a frequência de pulso (\texttt{pulse-rate}), a variabilidade da frequência cardíaca (\texttt{prv}), a frequência respiratória (\texttt{respiratory-rate}), a temperatura da pele (\texttt{temperature}) e o gasto energético metabólico (\texttt{met}). O dispositivo disponibiliza ainda variáveis relacionadas com o movimento e a atividade física, nomeadamente os sinais dos acelerómetros (\texttt{accelerometers}), as contagens de atividade do acelerómetro (\texttt{actiCounts}), as contagens de actigrafia (\texttt{actigraphy-counts}), as contagens de atividade (\texttt{activity-counts}), o número de passos (\texttt{step-counts}), a classificação do tipo de atividade (\texttt{activity-classification}), a intensidade da atividade (\texttt{activity-intensity}) e a posição corporal (\texttt{body-position}). São também registados o estado de deteção do sono (\texttt{sleep-detection}) e o estado de utilização do dispositivo (\texttt{wearing-detection}), que permitem contextualizar os sinais fisiológicos e identificar períodos sem utilização do dispositivo.
+
+Uma vez que o objetivo deste trabalho consiste em identificar padrões fisiológicos associados à fadiga física através de técnicas de clustering, foi selecionado um subconjunto de variáveis considerado relevante para caracterizar a resposta fisiológica e o nível de atividade dos trabalhadores. As variáveis utilizadas na análise final são apresentadas na Tabela \ref{tab:dataset_variables}. As decisões relativas ao tratamento dos valores ausentes, à seleção final das características e ao processo de transformação dos dados são descritas na subseção seguinte.
+
+\begin{center}
+\captionof{table}{Variáveis utilizadas na análise final e respetiva descrição.}
+\label{tab:dataset_variables}
+\small
+\begin{tabular*}{.95\textwidth}{@{} p{.38\linewidth} p{.52\linewidth} @{} }
+\toprule
+\textbf{Variável} & \textbf{Descrição} \\
+\midrule
+\texttt{timestamp\_unix} & Marca temporal em formato Unix. \\
+\texttt{eda\_scl\_usiemens} & Condutância elétrica da pele. \\
+\texttt{pulse\_rate\_bpm} & Frequência de pulso em batimentos por minuto. \\
+\texttt{prv\_rmssd\_ms} & Variabilidade do pulso, em milissegundos. \\
+\texttt{respiratory\_rate\_brpm} & Frequência respiratória por minuto. \\
+\texttt{met} & Equivalente metabólico da tarefa. \\
+\texttt{activity\_counts} & Contagens gerais de atividade. \\
+\texttt{step\_counts} & Número de passos detetados. \\
+\texttt{vector\_magnitude} & Magnitude combinada do movimento. \\
+\texttt{activity\_class} & Classe reconhecida da atividade. \\
+\texttt{activity\_intensity} & Intensidade da atividade realizada. \\
+\texttt{sleep\_detection\_stage} & Estádio de deteção do sono. \\
+\texttt{temperature\_celsius} & Temperatura da pele em graus Celsius. \\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+\subsection{Pré-processamento dos Dados}
+
+Antes do treino dos algoritmos de clustering, o conjunto de dados foi submetido a um processo de pré-processamento com o objetivo de garantir a qualidade da informação e obter um conjunto de características adequado para a análise. Em primeiro lugar, os diferentes ficheiros CSV gerados pelo dispositivo Empatica EmbracePlus, correspondentes a cada um dos sinais fisiológicos registados, foram integrados através das variáveis temporais comuns (\texttt{timestamp\_unix} e \texttt{timestamp\_iso}), obtendo-se um único conjunto de dados sincronizado com resolução temporal de um minuto.
+
+Posteriormente, foi realizada uma análise dos valores ausentes presentes em cada variável. Embora a maioria dos sinais apresentasse apenas uma reduzida percentagem de dados em falta, as variáveis PRV-RMSSD e Frequência Respiratória apresentavam uma proporção superior a 75\% de valores em falta, uma vez que o dispositivo estima estes biomarcadores apenas durante períodos de repouso ou sono. Dado que o objetivo deste trabalho consiste em analisar a atividade fisiológica durante a jornada laboral, ambas as variáveis foram excluídas das etapas posteriores da análise.
+
+Para as restantes variáveis numéricas (EDA, Frequência de Pulso, MET, Contagens de Atividade, Contagens de Passos, Temperatura e Magnitude Vetorial), os valores ausentes foram imputados através de interpolação linear, preservando a continuidade temporal dos sinais fisiológicos. No caso das variáveis categóricas (Intensidade de Atividade e Estádio de Deteção do Sono), foi utilizada uma estratégia de propagação do último valor válido (\textit{forward-fill}), por se tratarem de estados discretos que tendem a manter-se durante intervalos consecutivos.
+
+Foi também realizado um processo de deteção e tratamento de valores atípicos, utilizando os limites fisiologicamente plausíveis apresentados na Tabela \ref{tab:physiological_limits} para cada biomarcador. Em vez de eliminar essas observações, aplicou-se uma estratégia de \textit{clipping}, restringindo os valores fora do intervalo ao limite fisiologicamente aceitável e preservando, assim, a totalidade das observações disponíveis.
+
+\begin{center}
+\captionof{table}{Limites fisiológicos utilizados para a deteção e o tratamento de valores atípicos.}
+\label{tab:physiological_limits}
+\small
+\begin{tabular*}{.95\textwidth}{@{} p{.32\linewidth} p{.20\linewidth} p{.20\linewidth} p{.18\linewidth} @{} }
+\toprule
+\textbf{Variável} & \textbf{Limite mínimo} & \textbf{Limite máximo} & \textbf{Unidade} \\
+\midrule
+Frequência de Pulso & 0 & 250 & bpm \\
+EDA & 0 & 50 & \si{\micro\siemens} \\
+MET & 0,5 & 20 & MET \\
+Contagens de Passos & 0 & 300 & passos/min \\
+Contagens de Atividade & 0 & 100000 & contagens \\
+Magnitude Vetorial & 0 & 50000 & unidades \\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+Finalmente, as variáveis categóricas foram transformadas para um formato numérico, de modo a permitir a sua utilização pelos algoritmos de \textit{clustering}. A variável \textit{Activity Class} foi codificada através de \textbf{One-Hot Encoding}, gerando uma variável binária para cada uma das suas categorias (\textit{STILL}, \textit{WALKING} e \textit{GENERIC}). Esta estratégia foi adotada porque estas categorias representam estados independentes e não possuem uma relação de ordem, evitando que o modelo interprete artificialmente uma categoria como superior ou inferior a outra. Por sua vez, as variáveis \textit{Activity Intensity} e \textit{Sleep Detection Stage} foram transformadas através de \textbf{Ordinal Encoding}. No caso de \textit{Activity Intensity}, existe uma progressão natural entre os seus níveis (\textit{Sedentary}, \textit{LPA}, \textit{MPA} e \textit{VPA}), pelo que estes foram representados através de valores inteiros crescentes. Relativamente a \textit{Sleep Detection Stage}, as diferentes fases do sono foram agrupadas numa única categoria, distinguindo apenas entre o estado de vigília e o estado de sono, uma vez que o objetivo do estudo não era analisar a arquitetura do sono, mas sim identificar períodos de descanso e recuperação fisiológica. Por fim, todas as variáveis foram estandardizadas recorrendo ao StandardScaler, obtendo-se características com média zero e desvio-padrão unitário. Esta etapa revelou-se necessária para evitar que diferenças de escala entre as variáveis influenciassem o cálculo das distâncias e, consequentemente, a formação dos clusters pelos algoritmos utilizados.
+
+\subsection{Metodologia de Clustering}
+
+O objetivo deste trabalho consiste em identificar padrões fisiológicos associados a diferentes estados de fadiga sem recorrer a etiquetas previamente definidas. Para esse efeito, foi adotada uma abordagem de aprendizagem não supervisionada baseada na comparação de dois algoritmos de \textit{clustering} com características complementares: \textbf{Gaussian Mixture Models (GMM)} e \textbf{Clustering Hierárquico Aglomerativo}.
+
+\subsubsection{Gaussian Mixture Models}
+
+O \textbf{Gaussian Mixture Model (GMM)} foi selecionado pela sua capacidade de modelar os dados como uma combinação de distribuições Gaussianas, atribuindo a cada observação uma probabilidade de pertença a cada \textit{cluster}. Esta abordagem probabilística é particularmente adequada para representar transições fisiológicas graduais, uma vez que os diferentes estados de fadiga não apresentam fronteiras rígidas entre si.
+
+\subsubsection{Clustering Hierárquico Aglomerativo}
+
+Como segunda abordagem, foi utilizado o \textbf{Clustering Hierárquico Aglomerativo}, um método baseado em distâncias que constrói progressivamente uma estrutura hierárquica de agrupamentos. Esta estratégia permite explorar a organização natural dos dados através de diferentes níveis de agregação, fornecendo uma perspetiva complementar à abordagem probabilística do GMM.
+
+\subsubsection{Resolução Temporal e Agregação dos Dados}
+
+Com o objetivo de analisar o impacto da resolução temporal na qualidade dos agrupamentos, ambos os algoritmos foram aplicados em dois cenários distintos. No primeiro, utilizaram-se os registos fisiológicos originais com resolução temporal de um minuto. No segundo, os sinais foram agregados em janelas temporais consecutivas de dez minutos, permitindo reduzir a variabilidade de curto prazo e o efeito do ruído inerente aos dispositivos \textit{wearables}.
+
+\subsubsection{Interpretação dos Clusters}
+
+Finalmente, para facilitar a interpretação dos \textit{clusters} obtidos, foi treinada uma \textbf{Árvore de Decisão} utilizando como variável-alvo as etiquetas produzidas pelo algoritmo de \textit{clustering} selecionado. Esta etapa teve como objetivo extrair regras de decisão explícitas que permitissem caracterizar cada agrupamento através das variáveis fisiológicas originais, facilitando a sua integração numa plataforma de Gémeo Digital Humano.
+
+\medskip
+
+A configuração experimental dos modelos, incluindo a redução da dimensionalidade, a definição dos parâmetros dos algoritmos, a agregação dos dados em janelas temporais e o treino da Árvore de Decisão para interpretação dos clusters, é apresentada na secção seguinte. São também descritas as métricas utilizadas para avaliar a qualidade dos agrupamentos e comparar as diferentes abordagens não supervisionadas.
+
+\subsection{Configuração Experimental}
+
+Todos os modelos foram implementados em Python recorrendo à biblioteca \textit{Scikit-learn}, utilizando o mesmo conjunto de dados previamente pré-processado, normalizado através do \texttt{StandardScaler} e preparado conforme descrito na secção anterior.
+
+\subsubsection{Gaussian Mixture Model}
+
+O modelo \textbf{Gaussian Mixture Model (GMM)} foi treinado após uma etapa de redução da dimensionalidade utilizando \textbf{Principal Component Analysis (PCA)}, preservando aproximadamente 90\% da variância do conjunto de dados. Esta etapa permitiu reduzir a redundância entre variáveis e melhorar a eficiência computacional sem perda significativa de informação. O modelo foi configurado utilizando uma matriz de covariância completa (\texttt{covariance\_type = full}), permitindo que cada componente Gaussiana apresentasse diferentes níveis de dispersão e correlação entre as variáveis. A inicialização foi realizada através do método \textit{k-means} disponibilizado pela biblioteca \textit{Scikit-learn}, utilizando \texttt{random\_state = 42} para garantir a reprodutibilidade dos resultados. Foram avaliadas configurações compreendidas entre 2 e 9 componentes Gaussianas, sendo a configuração final selecionada através do \textit{Bayesian Information Criterion (BIC)}, que permite equilibrar simultaneamente a qualidade do ajustamento e a complexidade do modelo.
+
+\subsubsection{Clustering Hierárquico Aglomerativo}
+
+O \textbf{Clustering Hierárquico Aglomerativo} foi implementado recorrendo ao critério de ligação Ward, utilizando a distância euclidiana como medida de proximidade entre observações. Após o treino do modelo, foi construída a respetiva matriz de ligação, permitindo representar a organização hierárquica dos dados através de um dendrograma. Tal como no GMM, foram exploradas soluções compreendidas entre 2 e 9 \textit{clusters}. A seleção do número de agrupamentos foi suportada pela análise conjunta do \textit{Silhouette Score}, utilizado para avaliar a coesão e separação dos \textit{clusters}, e da curva do cotovelo (\textit{Elbow Method}), obtida através do algoritmo \textit{K-Means} durante a fase exploratória.
+
+\subsubsection{Agregação por Janelas Temporais}
+
+Para avaliar o efeito da resolução temporal na qualidade dos agrupamentos, foi implementada uma estratégia de agregação baseada em janelas consecutivas de 10 minutos, sem sobreposição. Cada janela foi representada pelo valor médio das variáveis fisiológicas correspondentes, originando um novo conjunto de dados com menor variabilidade temporal. Os dois algoritmos de \textit{clustering} foram posteriormente treinados tanto sobre os dados originais com resolução de 1 minuto como sobre os dados agregados em janelas de 10 minutos, permitindo comparar diretamente o impacto da suavização temporal na qualidade dos agrupamentos.
+
+\subsubsection{Árvore de Decisão para Interpretação dos Clusters}
+
+Após a obtenção dos \textit{clusters}, foi treinada uma \textbf{Árvore de Decisão} com o objetivo de interpretar os agrupamentos identificados. As variáveis fisiológicas e comportamentais originais foram utilizadas como atributos de entrada, enquanto as etiquetas produzidas pelo algoritmo de \textit{clustering} constituíram a variável-alvo. O modelo foi configurado utilizando o critério de divisão Gini (\texttt{criterion = gini}), profundidade máxima de 10 níveis (\texttt{max\_depth = 10}), um mínimo de 10 amostras por folha (\texttt{min\_samples\_leaf = 10}) e \texttt{random\_state = 42} para garantir a reprodutibilidade dos resultados. O objetivo desta etapa não consistiu em desenvolver um novo modelo preditivo, mas sim em extrair regras de decisão interpretáveis que permitissem caracterizar os diferentes estados fisiológicos identificados pelos algoritmos de \textit{clustering}.
+
+\subsubsection{Métricas de Avaliação}
+
+A avaliação dos modelos de aprendizagem não supervisionada foi realizada recorrendo a métricas adequadas à análise da qualidade dos agrupamentos. No caso do \textbf{Gaussian Mixture Model}, o \textit{Bayesian Information Criterion (BIC)} foi utilizado para determinar o número ótimo de componentes, sendo complementado pelo \textit{Silhouette Score}, que avalia simultaneamente a coesão interna e a separação entre \textit{clusters}. Para o \textbf{Clustering Hierárquico Aglomerativo}, a qualidade dos agrupamentos foi igualmente analisada através do \textit{Silhouette Score}, sendo a escolha do número de \textit{clusters} complementada pela análise da curva do cotovelo (\textit{Elbow Method}) e da estrutura hierárquica observada no dendrograma.
+
+\subsection{Fluxo Metodológico (\textit{Methodological Workflow})}
+
+A Figura \ref{fig:methodological_workflow} apresenta uma visão global da metodologia seguida neste trabalho. Após a recolha dos sinais fisiológicos através do dispositivo Empatica EmbracePlus, os diferentes ficheiros foram integrados e submetidos a um processo de pré-processamento, incluindo seleção de variáveis, tratamento de valores em falta, codificação das variáveis categóricas e normalização. Em seguida, foram gerados dois conjuntos de dados com diferentes resoluções temporais (1 minuto e janelas de 10 minutos), utilizados para treinar e comparar os algoritmos Gaussian Mixture Models e Clustering Hierárquico Aglomerativo. Finalmente, os clusters obtidos foram interpretados através de um modelo de Árvore de Decisão, permitindo extrair regras compreensíveis para a sua integração numa plataforma de Gémeo Digital Humano.
+
+\begin{center}
+  \includegraphics[width=1\linewidth]{figs/arquitecture.png}
+  \captionof{figure}{Fluxo metodológico do estudo.}
+  \label{fig:methodological_workflow}
+\end{center}
+
+
+\section{Resultados Experimentais e Discussão}\label{sec:results}
+
+Nesta secção, apresentam-se os resultados experimentais obtidos a partir dos modelos de agrupamento desenvolvidos para a identificação de estados fisiológicos, utilizando os dados registados pelo dispositivo Empatica EmbracePlus. Os experimentos foram realizados tanto com os dados originais, com resolução temporal de um minuto, como com uma representação agregada através de janelas temporais de dez minutos, com o objetivo de analisar o efeito da agregação temporal no desempenho dos modelos.
+
+Em primeiro lugar, apresentam-se os resultados do treino e da validação dos diferentes algoritmos, incluindo as métricas utilizadas para avaliar a qualidade dos agrupamentos e o processo de seleção do número de clusters. Posteriormente, é apresentada a interpretação fisiológica dos estados identificados e realizada uma discussão comparativa dos modelos, com o objetivo de determinar a abordagem mais adequada para a identificação de estados fisiológicos associados à fadiga.
+
+\subsection{Desempenho dos modelos}
+
+Para avaliar o desempenho dos modelos de agrupamento e a qualidade das estruturas identificadas, foram analisadas as configurações obtidas através do Gaussian Mixture Model (GMM) e do Clustering Hierárquico Aglomerativo, tanto com os dados originais como com os dados agregados em janelas temporais de 10 minutos. No caso do GMM, utilizou-se o Bayesian Information Criterion (BIC) como principal critério para selecionar a estrutura do modelo. Para o Clustering Hierárquico Aglomerativo, utilizou-se o índice de Silhouette, complementado pela curva do cotovelo, para apoiar a seleção do número ótimo de agrupamentos.
+
+\begin{center}
+\captionof{table}{Métricas Estruturais dos Modelos de Clustering}
+\label{tab:clustering_metrics}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l c c c c c}
+\hline
+Algoritmo & Dados & Original / PCA & Critério de Seleção & Clusters ($k$) & Silhouette Score \\
+\hline
+GMM & Original & 12 / 6 & BIC & 9 & 0.3475 \\
+GMM & Janelas (10 min) & 12 / 4 & BIC & 5 & 0.3742 \\
+\hline
+Clustering Hierárquico & Original & 12 / -- & Silhouette + Elbow & 5 & 0.3959 \\
+Clustering Hierárquico & Janelas (10 min) & 12 / -- & Silhouette + Elbow & 5 & 0.4132 \\
+\hline
+\end{tabular}%
+}
+\end{center}
+
+\textbf{A Tabela} \ref{tab:clustering_metrics} resume as principais configurações avaliadas. No caso do \textbf{GMM}, os dados originais foram reduzidos através da \textit{Principal Component Analysis (PCA)}, passando de 12 para 6 componentes antes do treino. Esta transformação permitiu reduzir a complexidade do espaço de características, preservando aproximadamente 90\% da variância original dos dados. Por sua vez, a representação baseada em janelas temporais utilizou apenas 4 componentes, o que sugere que a suavização dos dados permitiu simplificar a sua representação e, consequentemente, reduzir o número de parâmetros a estimar, favorecendo uma maior estabilidade durante o processo de aprendizagem. Em contrapartida, o \textbf{Clustering Hierárquico Aglomerativo} foi aplicado diretamente às variáveis normalizadas, sem redução da dimensionalidade através de PCA. Os resultados mostram que a utilização de janelas temporais de 10 minutos melhorou o índice de \textit{Silhouette} em ambos os algoritmos. No caso do GMM, o valor aumentou de 0,3475 para 0,3742, enquanto no Clustering Hierárquico passou de 0,3959 para 0,4132. Estes resultados indicam que a agregação temporal favoreceu a formação de agrupamentos com maior coesão interna e melhor separação entre grupos.
+
+Em termos comparativos, o Clustering Hierárquico apresentou os valores de Silhouette mais elevados em ambas as representações temporais. Contudo, a avaliação do desempenho não se limitou exclusivamente a esta métrica, uma vez que uma solução com maior qualidade geométrica pode gerar um número excessivo de agrupamentos ou ser difícil de interpretar do ponto de vista fisiológico. Por esse motivo, a seleção da configuração final foi realizada considerando conjuntamente as métricas de qualidade, a estrutura dos agrupamentos e a sua interpretabilidade fisiológica.
+
+\subsection{Seleção do Número de Clusters}
+
+A seleção do número de clusters constitui um aspeto fundamental do processo de agrupamento, uma vez que determina o nível de detalhe com que são representados os diferentes estados fisiológicos. Para o GMM, esta seleção foi realizada principalmente através do critério Bayesian Information Criterion (BIC), enquanto, para o Clustering Hierárquico, foram considerados conjuntamente o índice de Silhouette, o método do cotovelo (\textit{Elbow Method}) e o dendrograma.
+
+No caso do GMM aplicado aos dados originais com resolução temporal de um minuto, o critério BIC identificou uma solução com nove clusters como a configuração com melhor ajustamento segundo este critério. Contudo, esta solução apresentou uma elevada fragmentação dos estados fisiológicos, dificultando a sua interpretação direta. 
+
+Para os dados agregados através de janelas temporais de 10 minutos, o GMM selecionou cinco clusters de acordo com o critério BIC, alcançando um valor de Silhouette de 0,3742. Esta configuração apresentou um equilíbrio mais favorável entre a qualidade estrutural e a interpretabilidade dos agrupamentos. Como ilustrado na Figura \ref{fig:bic_curves}, nos dados originais observa-se uma tendência decrescente do BIC que conduz à seleção de nove clusters, enquanto, nos dados em janelas de 10 minutos, se obtém uma estrutura mais definida em torno de cinco clusters.
+
+\begin{center}
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figs/BICoriginal.png}
+    \centerline{(a) Dados Originais (ao minuto)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figs/BICjanela.png}
+    \centerline{(b) Janelas de 10 Minutos}
+  \end{minipage}
+  \captionof{figure}{Curvas do Bayesian Information Criterion (BIC) obtidas para o modelo GMM.}
+  \label{fig:bic_curves}
+\end{center}
+
+No caso do Clustering Hierárquico Aglomerativo, a seleção da configuração final foi realizada através da análise conjunta do índice de Silhouette, do método do cotovelo (\textit{Elbow Method}) e dos dendrogramas obtidos para as duas representações temporais. Embora as métricas individuais tenham identificado diferentes soluções como ótimas do ponto de vista estritamente geométrico, a escolha de cinco clusters permitiu alcançar um equilíbrio entre a qualidade dos agrupamentos, o nível de detalhe da segmentação e a interpretabilidade dos estados fisiológicos identificados.
+
+As Figuras \ref{fig:elbow_curves}(a) e \ref{fig:elbow_curves}(b) apresentam as curvas do método do \textbf{cotovelo} para os dados originais, com resolução temporal de um minuto, e para os dados agregados através de janelas de 10 minutos, respetivamente. Estas curvas representam a evolução do Within-Cluster Sum of Squares (WCSS) em função do número de clusters. Embora o WCSS diminua à medida que $k$ aumenta, o objetivo consiste em identificar o ponto a partir do qual a adição de novos clusters proporciona melhorias progressivamente menores. Em ambos os casos, observa-se uma redução acentuada para valores baixos de $k$, seguida de uma diminuição mais gradual. Os dados agregados em janelas apresentam valores de WCSS inferiores, em consonância com a menor variabilidade introduzida pela agregação temporal. Embora nenhuma das curvas apresente um ponto de cotovelo claramente definido, ambas revelam uma tendência de estabilização em soluções intermédias, o que desaconselha uma segmentação excessivamente fragmentada.
+
+\begin{center}
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figs/cotoveloOriginal.png}
+    \centerline{(a) Curva do Cotovelo (1 min bruto)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figs/cotoveloJanela.png}
+    \centerline{(b) Curva do Cotovelo (10 min suavizado)}
+  \end{minipage}
+  \captionof{figure}{Curvas do método do cotovelo para o Clustering Hierárquico Aglomerativo.}  \label{fig:elbow_curves}
+\end{center}
+
+As curvas apresentadas nas Figuras \ref{fig:silhouette_curves}(a) e \ref{fig:silhouette_curves}(b) mostram a evolução do índice de \textbf{Silhouette} para diferentes valores de $k$. Nos dados originais, o valor máximo é obtido para $k=8$. No entanto, a partir de aproximadamente cinco clusters, observa-se uma região relativamente estável, na qual as variações do índice são reduzidas até atingir esse máximo. Este resultado indica que as soluções intermédias apresentam uma qualidade geométrica comparável. Assim, a escolha de $k=8$ não implica necessariamente uma melhoria suficientemente significativa que justifique uma maior fragmentação dos estados fisiológicos. Para os dados agregados em janelas de 10 minutos, o valor máximo do índice de \textit{Silhouette} é obtido para $k=2$. Embora esta configuração apresente a melhor separação geométrica segundo esta métrica, uma divisão em apenas dois grupos é demasiado geral para representar a diversidade de comportamentos fisiológicos observados ao longo de uma jornada completa. Para $k=5$, o índice mantém um valor competitivo e permite uma representação mais detalhada dos diferentes estados. Consequentemente, a análise do índice de \textit{Silhouette} demonstra que a seleção de $k$ não deve basear-se exclusivamente no valor máximo da métrica, devendo considerar também a utilidade da segmentação resultante e a identificação de eventuais pontos de inflexão ou alterações de tendência na evolução do índice.
+
+\begin{center}
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figs/silhouetteOriginal.png}
+    \centerline{(a) Dados originais (1 minuto)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figs/silhouetteJanela.png}
+    \centerline{(b) Dados agregados (10 minutos)}
+  \end{minipage}
+  \captionof{figure}{Evolução do índice de \textit{Silhouette} para diferentes valores de $k$.}  \label{fig:silhouette_curves}
+\end{center}
+
+As Figuras \ref{fig:dendrogram_original} e \ref{fig:dendrogram_window} apresentam os \textbf{dendrogramas} correspondentes aos dados originais e aos dados agregados em janelas de 10 minutos, respetivamente. Esta representação permite observar a estrutura hierárquica dos dados e analisar as distâncias a que ocorrem as sucessivas fusões entre grupos. No dendrograma correspondente aos dados originais, observam-se fusões a distâncias relativamente elevadas, o que reflete uma maior dispersão das observações e, consequentemente, uma maior variabilidade nos padrões fisiológicos registados ao nível do minuto. Em contraste, o dendrograma obtido com as janelas temporais apresenta uma estrutura mais compacta, com fusões a distâncias inferiores, em consonância com o efeito de suavização produzido pela agregação temporal.
+
+Além de fornecer informação sobre a estrutura hierárquica, os dendrogramas permitem avaliar visualmente diferentes valores de $k$ através da seleção de um nível de corte. Nos dados originais, um corte situado em torno de uma distância de 100 gera uma separação muito geral em dois grandes grupos, enquanto um corte próximo de uma distância de 40 permite obter cinco agrupamentos distintos. Esta última configuração proporciona uma segmentação suficientemente detalhada, sem atingir o nível de fragmentação associado a soluções com um número elevado de clusters. Deste modo, o dendrograma fornece evidência visual adicional que complementa os resultados obtidos através do método do cotovelo e do índice de \textit{Silhouette}.
+
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figs/dendrogamaOriginal.png}
+  \captionof{figure}{Dendrograma do Clustering Hierárquico Aglomerativo para os dados originais.}
+  \label{fig:dendrogram_original}
+\end{center}
+
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figs/dendrogamaJanela.png}
+  \captionof{figure}{Dendrograma do Clustering Hierárquico Aglomerativo em janelas de 10 minutos.}
+  \label{fig:dendrogram_window}
+\end{center}
+
+Em conjunto, os três critérios proporcionam perspetivas complementares sobre a seleção do número de clusters. O \textit{método do cotovelo} permite identificar a região em que a incorporação de novos grupos deixa de produzir melhorias substanciais na coesão interna; o índice de \textit{Silhouette} permite comparar a qualidade geométrica das diferentes partições; e o \textit{dendrograma} permite analisar visualmente a estrutura hierárquica e os níveis de separação entre os grupos. Considerando conjuntamente estas evidências e, sobretudo, a necessidade de obter estados fisiológicos suficientemente diferenciados e interpretáveis, adotou-se finalmente uma configuração de \textbf{$k=5$ clusters} para o Clustering Hierárquico em ambas as representações temporais.
+
+
+\subsection{Validação dos agrupamentos}
+
+Para avaliar a consistência e a interpretabilidade dos agrupamentos obtidos, foi utilizada uma Árvore de Decisão tendo como variáveis de entrada os atributos fisiológicos e como variável-alvo os clusters previamente identificados pelo Clustering Hierárquico Aglomerativo. Esta abordagem permite verificar em que medida os agrupamentos podem ser reproduzidos através de regras de decisão simples, bem como identificar as variáveis com maior capacidade de discriminação entre os diferentes estados. A Tabela \ref{tab:arvore_validacao} apresenta os resultados obtidos para os dados originais e para os dados agregados em janelas temporais de 10 minutos.
+
+\begin{center}
+\captionof{table}{Avaliação da Interpretabilidade através de Árvore de Decisão}
+\label{tab:arvore_validacao}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l c c c}
+\hline
+Configuração & Profundidade Máxima & Accuracy Treino & Accuracy (5-Fold CV) \\
+\hline
+Dados Originais & 8 & 98.61\% & 92.01\% $\pm$ 4.44\% \\
+Janelas (10 min) & 5 & 93.06\% & 83.92\% $\pm$ 10.24\% \\
+\hline
+\end{tabular}%
+}
+\end{center}
+
+Nos dados originais, a árvore apresentou uma \textit{accuracy} de 98.61\% no conjunto de treino e 92.01\% ± 4.44\% na validação cruzada de 5 \textit{folds}. Para as janelas de 10 minutos, foram obtidos valores de 93.06\% no treino e 83.92\% ± 10.24\% na validação cruzada. Embora o desempenho seja inferior após a agregação temporal, os resultados continuam a indicar que os clusters apresentam fronteiras suficientemente consistentes para serem reproduzidas por um modelo supervisionado simples. Esta diferença deve também ser interpretada considerando a redução substancial do número de observações.
+
+A análise da estrutura das árvores permite compreender quais os atributos com maior capacidade de discriminação entre os agrupamentos. Nos dados originais, com resolução temporal de um minuto, a árvore atingiu uma profundidade máxima de oito níveis, refletindo a maior variabilidade e as flutuações rápidas dos sinais. As variáveis mais importantes foram \texttt{sleep\_detection\_stage} (31,47\%), \texttt{activity\_intensity} (24,54\%), \texttt{walking} (20,88\%) e \texttt{still} (17,06\%). Seguiram-se \texttt{eda\_scl\_usiemens} (3,25\%), \texttt{step\_counts} (1,90\%), \texttt{pulse\_rate\_bpm} (0,68\%) e \texttt{vector\_magnitude} (0,21\%).
+
+Na representação agregada em janelas de 10 minutos, a árvore apresentou uma profundidade máxima de cinco níveis. Neste caso, destacaram-se \texttt{still} (41,34\%), \texttt{step\_counts} (29,95\%) e \texttt{walking} (22,85\%), enquanto \texttt{activity\_counts} apresentou uma importância de 5,70\% e \texttt{met} uma contribuição residual de 0,15\%.
+
+A Figura \ref{fig:arvore_jerarquico_original} apresenta a árvore obtida para os dados originais, enquanto a Figura \ref{fig:arvore_jerarquico_window} apresenta a correspondente estrutura para as janelas temporais de 10 minutos. As regras extraídas mostram que, na resolução de um minuto, a distinção entre clusters é inicialmente condicionada pelo estágio de sono e pelo nível de atividade, sendo posteriormente refinada por variáveis relacionadas com movimento e resposta fisiológica. Após a agregação temporal, a lógica de decisão passa a depender principalmente de medidas mais estáveis do comportamento, como a permanência em estado estático, o número de passos e a ocorrência de caminhada. As regras de decisão detalhadas para os dados originais e para as janelas de 10 minutos são apresentadas, respetivamente, nas Tabelas \ref{tab:regras_originais} e \ref{tab:regras_janelas}.
+
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figs/jerarquico1min.png}
+  \captionof{figure}{Árvore de Decisão para dados com resolução de um minuto.}
+  \label{fig:arvore_jerarquico_original}
+\end{center}
+
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figs/jerarquico10min.png}
+  \captionof{figure}{Árvore de Decisão para dados agregados em janelas de 10 minutos.}
+  \label{fig:arvore_jerarquico_window}
+\end{center}
+
+\begin{center}
+\centering
+\captionof{table}{Regras de Decisão para a Identificação de Clusters (Dados Originais).}
+\label{tab:regras_originais}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l}
+\hline
+\textbf{Regras Lógicas Extraídas (Resolução Temporal: 1 minuto)} \\
+\hline
+Se \textbf{\texttt{sleep\_detection\_stage}} $\le 0.50$: \\
+~~Se \textbf{\texttt{walking}} $\le 0.50$: \\
+~~~~Se \textbf{\texttt{activity\_intensity}} $\le 1.50$: \\
+~~~~~~Se \textbf{\texttt{still}} $\le 0.50$: \\
+~~~~~~~~Se \textbf{\texttt{eda\_scl\_usiemens}} $\le 3.39$: \\
+~~~~~~~~~~Se \textbf{\texttt{step\_counts}} $\le 59.50$: \\
+~~~~~~~~~~~~Se \textbf{\texttt{pulse\_rate\_bpm}} $\le 99.00$: \\
+~~~~~~~~~~~~~~Se \textbf{\texttt{vector\_magnitude}} $\le 4722.00 \rightarrow$ \textbf{Cluster 3} (Atividade de transição/baixo movimento) \\
+~~~~~~~~~~~~~~Se \textbf{\texttt{vector\_magnitude}} $> 4722.00 \rightarrow$ \textbf{Cluster 3} (Atividade residual física em repouso) \\
+~~~~~~~~~~~~~~Se \textbf{\texttt{pulse\_rate\_bpm}} $> 99.00 \rightarrow$ \textbf{Cluster 3} (Ativação fisiológica pontual sem locomoção) \\
+~~~~~~~~~~Se \textbf{\texttt{step\_counts}} $> 59.50 \rightarrow$ \textbf{Cluster 1} (Fração de movimento transicional ligeiro) \\
+~~~~~~~~Se \textbf{\texttt{eda\_scl\_usiemens}} $> 3.39 \rightarrow$ \textbf{Cluster 2} (Trabalho estático com elevada reatividade simpática) \\
+~~~~~~Se \textbf{\texttt{still}} $> 0.50 \rightarrow$ \textbf{Cluster 2} (Trabalho sedentário/estático padrão) \\
+~~~~Se \textbf{\texttt{activity\_intensity}} $> 1.50$: \\
+~~~~~~Se \textbf{\texttt{eda\_scl\_usiemens}} $\le 1.87 \rightarrow$ \textbf{Cluster 1} (Esforço físico leve com baixa condutância eletrodérmica) \\
+~~~~~~Se \textbf{\texttt{eda\_scl\_usiemens}} $> 1.87 \rightarrow$ \textbf{Cluster 3} (Esforço físico moderado com maior ativação simpática) \\
+~~Se \textbf{\texttt{walking}} $> 0.50 \rightarrow$ \textbf{Cluster 0} (Atividade física de caminhada) \\
+Se \textbf{\texttt{sleep\_detection\_stage}} $> 0.50$: \\
+~~Se \textbf{\texttt{activity\_intensity}} $\le 2.50 \rightarrow$ \textbf{Cluster 4} (Fase de repouso ou sono profundo com baixa ativação) \\
+~~Se \textbf{\texttt{activity\_intensity}} $> 2.50 \rightarrow$ \textbf{Cluster 1} (Fase de repouso com transições de movimento leve) \\
+\hline
+\end{tabular}%
+}
+\end{center}
+
+\begin{center}
+\centering
+\captionof{table}{Regras de Decisão para a Identificação de Clusters (Janelas de 10 min).}
+\label{tab:regras_janelas}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l}
+\hline
+\textbf{Regras Lógicas Extraídas (Agregação Temporal: Janelas de 10 minutos)} \\
+\hline
+Se \textbf{\texttt{still}} $\le 0.85$: \\
+~~Se \textbf{\texttt{step\_counts}} $\le 6.45$: \\
+~~~~Se \textbf{\texttt{walking}} $\le 0.05$ $\rightarrow$ \textbf{Cluster 0} (Transições breves de movimento sedentário) \\
+~~~~Se \textbf{\texttt{walking}} $> 0.05$ $\rightarrow$ \textbf{Cluster 0} (Transições de caminhada muito leve pontual) \\
+~~Se \textbf{\texttt{step\_counts}} $> 6.45$: \\
+~~~~Se \textbf{\texttt{walking}} $\le 0.45$: \\
+~~~~~~Se \textbf{\texttt{activity\_counts}} $\le 79.65$ $\rightarrow$ \textbf{Cluster 4} (Trabalho com movimentação generalizada em ritmo calmo) \\
+~~~~~~Se \textbf{\texttt{activity\_counts}} $> 79.65$: \\
+~~~~~~~~Se \textbf{\texttt{met}} $\le 2.69$ $\rightarrow$ \textbf{Cluster 2} (Trabalho físico leve com carga metabólica controlada) \\
+~~~~~~~~Se \textbf{\texttt{met}} $> 2.69$ $\rightarrow$ \textbf{Cluster 2} (Atividade laboral ativa integrada de movimento variado) \\
+~~~~Se \textbf{\texttt{walking}} $> 0.45$ $\rightarrow$ \textbf{Cluster 3} (Atividade contínua ou prolongada de caminhada ativa) \\
+Se \textbf{\texttt{still}} $> 0.85$ $\rightarrow$ \textbf{Cluster 1} (Estado estático dominante - repouso consolidado ou sono estável) \\
+\hline
+\end{tabular}%
+}
+\end{center}
+
+Em conjunto, a validação dos agrupamentos permitiu verificar a consistência das soluções obtidas e, no caso do \textbf{Clustering Hierárquico Aglomerativo}, avançar também para uma representação mais interpretável dos estados identificados. Através de \textbf{Árvores de Decisão}, foi possível transformar as atribuições geradas pelo modelo hierárquico, cuja lógica de agrupamento não é diretamente interpretável, num conjunto de regras baseadas em limiares das variáveis fisiológicas, com um comportamento próximo do de regras heurísticas. Esta transformação é particularmente relevante, uma vez que permite identificar explicitamente as condições associadas a cada estado e facilita a interpretação e a aplicação posterior dos resultados do \textit{clustering}.
+
+
+\subsection{Interpretação dos Clusters Fisiológicos}
+
+Um passo fundamental desta investigação foi a interpretação dos clusters gerados pelos diferentes modelos de agrupamento, com o objetivo de compreender o significado de cada grupo e verificar se estes correspondiam a estados fisiológicos e comportamentais reais. Para isso, foram analisados os níveis relativos das variáveis fisiológicas e comportamentais (\textit{LOW}, \textit{MED} e \textit{HIGH}), juntamente com a distribuição dos clusters ao longo da jornada diária. Esta análise permitiu relacionar os diferentes clusters com estados como repouso, vigília, atividade física e carga cognitiva, verificando também se a sua ocorrência ao longo do tempo era coerente com esses estados.
+
+\subsubsection{GMM com dados originais ($k=9$)}
+
+A interpretação fisiológica dos agrupamentos obtidos pelo \textit{Gaussian Mixture Model} (GMM) com os dados originais, ao nível do minuto, foi realizada a partir da assinatura relativa das variáveis fisiológicas e comportamentais e da distribuição temporal dos clusters ao longo do dia. A Tabela \ref{tab:percentis_gmm_original} apresenta os valores relativos \textit{LOW}, \textit{MED} e \textit{HIGH} das principais variáveis, permitindo caracterizar os diferentes estados identificados pelo modelo.
+
+\begin{center}
+  \captionof{table}{Physiological signature of the GMM clusters using original data ($k=9$, one-minute resolution).}
+    \label{tab:percentis_gmm_original}
+    \renewcommand{\arraystretch}{1.4}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{c c c c c c c c c c}
+    \hline
+    \textbf{Cluster} & \textbf{EDA} & \textbf{Pulse Rate} & \textbf{MET} & \textbf{Act. Counts} & \textbf{Step Counts} & \textbf{Vec. Mag.} & \textbf{Act. Intensity} & \textbf{Sleep Stage} & \textbf{Significado Fisiológico Proposto} \\
+    \hline
+    5 & \textit{LOW} & \textit{MED} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{HIGH} & [Grupo de sono] início \\
+    0 & \textit{MED} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{HIGH} & [Grupo de sono] profundo \\
+    1 & \textit{LOW} & \textit{MED} & \textit{HIGH} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & [Grupo de despertar] \\
+    7 & \textit{HIGH} & \textit{MED} & \textit{MED} & \textit{LOW} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{HIGH} & [Grupo de sedentarismo/foco] estado base \\
+    2 & \textit{HIGH} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{LOW} & [Grupo de sedentarismo/foco] trabalho/concentração \\
+    6 & \textit{HIGH} & \textit{LOW} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{LOW} & [Grupo de sedentarismo/foco] pico stress \\
+    3 & \textit{LOW} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{LOW} & [Grupo de atividade física] caminhada \\
+    8 & \textit{LOW} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{LOW} & [Grupo de atividade física] movimento geral \\
+    4 & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{LOW} & [Grupo de atividade física] atividade intensa \\
+    \hline
+    \end{tabular}%
+    }
+\end{center}
+
+A análise da Tabela \ref{tab:percentis_gmm_original} mostra que, embora os nove clusters correspondam à solução estatisticamente ótima segundo o critério BIC, vários apresentam assinaturas fisiológicas semelhantes, diferenciando-se principalmente pela intensidade da atividade ou pelo nível de ativação fisiológica. Os agrupamentos podem, assim, ser interpretados como diferentes manifestações de quatro estados funcionais principais: repouso/sono, despertar, sedentarismo ou concentração e atividade física. Os clusters associados ao sono apresentam baixos níveis de movimento e gasto energético, enquanto os grupos relacionados com atividade física apresentam valores elevados de MET, passos, movimento e intensidade de atividade. Entre estes extremos, os clusters associados ao sedentarismo e à concentração distinguem-se sobretudo pelo aumento da EDA e por níveis moderados de atividade.
+
+A distribuição temporal apresentada na Figura \ref{fig:temporal_gmm_original} permite complementar esta caracterização, mostrando como os diferentes agrupamentos se sucedem ao longo das 24 horas.
+
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figs/temporalgmmoriginal.png}
+  \captionof{figure}{Distribuição temporal diária dos clusters do GMM com dados de um minuto.}
+    \label{fig:temporal_gmm_original}
+\end{center}
+
+Apesar do elevado nível de detalhe proporcionado pelos dados ao minuto, observa-se uma maior alternância entre os estados e uma segmentação mais fragmentada. Assim, os nove clusters não representam necessariamente nove estados fisiológicos distintos, podendo corresponder a diferentes variações de um conjunto mais reduzido de estados funcionais. Esta interpretação é importante para a análise posterior, pois permite relacionar os clusters identificados pelo GMM com estados fisiológicos e comportamentais observáveis ao longo da rotina diária.
+
+
+\subsubsection{GMM com janelas de 10 minutos ($k=5$)}
+
+Para os dados agregados em janelas de 10 minutos, o GMM foi configurado com cinco clusters, permitindo obter uma representação mais compacta dos estados fisiológicos. A Tabela \ref{tab:percentis_gmm_janela} apresenta a assinatura relativa dos agrupamentos.
+
+\begin{center}
+  \captionof{table}{Physiological signature of the GMM clusters ($k=5$, 10-minute windows).}
+    \label{tab:percentis_gmm_janela}
+    \renewcommand{\arraystretch}{1.4}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{c c c c c c c c c c}
+    \textbf{Cluster} & \textbf{EDA} & \textbf{Pulse Rate} & \textbf{MET} & \textbf{Act. Counts} & \textbf{Step Counts} & \textbf{Vec. Mag.} & \textbf{Act. Intensity} & \textbf{Sleep Stage} & \textbf{Significado Fisiológico Proposto} \\
+    \hline
+    0 & \textit{LOW} & \textit{LOW} & \textit{HIGH} & \textit{MED} & \textit{HIGH} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & ``Salto'' da Cama / Transição Matinal \\
+    1 & \textit{MED} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{HIGH} & Sono Estável / Estado de Repouso \\
+    2 & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{LOW} & Picos de Intensidade Física \\
+    3 & \textit{HIGH} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{HIGH} & Jornada Laboral / Carga Cognitiva \\
+    4 & \textit{LOW} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & Rotina Ativa e Deslocamentos \\
+    \hline
+    \end{tabular}%
+    }
+\end{center}
+
+Os cinco agrupamentos apresentam assinaturas fisiológicas distintas e permitem identificar estados associados ao repouso, à transição entre sono e vigília, à atividade quotidiana, à carga cognitiva e aos momentos de maior intensidade física. O cluster \textit{Sono Estável} caracteriza-se por baixos níveis de atividade, frequência cardíaca e gasto energético, enquanto o cluster \textit{Transição Matinal} combina elevados níveis de MET e movimento com valores ainda reduzidos de frequência cardíaca e EDA. O cluster \textit{Rotina Ativa e Deslocamentos} apresenta indicadores elevados de movimento e atividade, sendo compatível com deslocações e atividade física ligeira. Por sua vez, a \textit{Jornada Laboral / Carga Cognitiva} distingue-se principalmente pela EDA elevada e atividade moderada, enquanto os \textit{Picos de Intensidade Física} apresentam valores elevados na maioria das variáveis, correspondendo aos episódios de maior exigência física.
+
+A distribuição temporal destes agrupamentos ao longo da jornada é apresentada na Figura \ref{fig:temporal_gmm_janela}.
+
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figs/temporalgmmjanela.png}
+  \captionof{figure}{Daily temporal distribution of the GMM clusters ($k=5$, 10-minute windows) throughout a workday.}
+    \label{fig:temporal_gmm_janela}
+\end{center}
+
+A distribuição temporal evidencia uma organização mais estável dos estados fisiológicos, com períodos relativamente contínuos de repouso, atividade quotidiana e carga laboral. Em particular, observa-se uma sequência coerente entre o período de sono, a transição matinal, as atividades e deslocações, a jornada laboral e os episódios pontuais de maior intensidade. Esta organização contrasta com a maior fragmentação observada nos dados ao minuto e sugere que a agregação temporal reduz as flutuações instantâneas dos sinais, facilitando a identificação de estados fisiológicos mais estáveis e interpretáveis.
+
+
+\subsubsection{Clustering Hierárquico com dados originais ($k=5$)}
+
+Para o \textit{Clustering Hierárquico Aglomerativo} aplicado aos dados originais, ao nível do minuto, foi adotada uma configuração de cinco clusters. A caracterização fisiológica dos agrupamentos obtidos é apresentada na Tabela \ref{tab:percentis_hier_original}, considerando os níveis relativos das variáveis fisiológicas e comportamentais.
+
+\begin{center}
+\captionof{table}{Assinatura Fisiológica dos Clusters para o Clustering Hierárquico ($k=5$, Dados ao Minuto)}
+\label{tab:percentis_hier_original}
+\renewcommand{\arraystretch}{1.4}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c c c c c c c c c c}
+\hline
+\textbf{Cluster} & \textbf{EDA} & \textbf{Pulse Rate} & \textbf{MET} & \textbf{Act. Counts} & \textbf{Step Counts} & \textbf{Vec. Mag.} & \textbf{Act. Intensity} & \textbf{Sleep Stage} & \textbf{Significado Fisiológico Proposto} \\
+\hline
+0 & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{LOW} & Movimento Ativo e Caminhadas \\
+1 & \textit{MED} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & Atividade com Presença de Sono \\
+2 & \textit{HIGH} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{LOW} & Concentração / Carga Cognitiva \\
+3 & \textit{HIGH} & \textit{MED} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{MED} & \textit{MED} & \textit{LOW} & Esforço Físico / Atividade Intensa \\
+4 & \textit{MED} & \textit{LOW} & \textit{MED} & \textit{LOW} & \textit{MED} & \textit{LOW} & \textit{MED} & \textit{HIGH} & Repouso ou Sono \\
+\hline
+\end{tabular}%
+}
+\end{center}
+
+A análise das assinaturas permite identificar estados associados ao repouso, à concentração e à atividade física. O cluster \textit{Repouso ou Sono} apresenta os menores níveis de atividade e frequência cardíaca, juntamente com valores elevados de \textit{Sleep Stage}. Em contraste, os clusters \textit{Movimento Ativo e Caminhadas} e \textit{Esforço Físico / Atividade Intensa} apresentam níveis elevados de movimento e atividade. O cluster \textit{Concentração / Carga Cognitiva} distingue-se principalmente pela EDA elevada e por níveis moderados de atividade. Por outro lado, o cluster \textit{Atividade com Presença de Sono} combina níveis elevados de atividade com um valor elevado de \textit{Sleep Stage}, resultando numa assinatura menos intuitiva do ponto de vista fisiológico.
+
+A distribuição temporal dos agrupamentos ao longo da jornada é apresentada na Figura \ref{fig:temporal_hier_original}.
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figs/temporalherarquicooriginal.png}
+\captionof{figure}{Distribuição temporal diária dos clusters do Clustering Hierárquico ($k=5$, dados ao minuto) ao longo de uma jornada.}
+\label{fig:temporal_hier_original}
+\end{center}
+
+A distribuição temporal evidencia uma maior alternância entre estados quando comparada com o GMM, com transições mais frequentes e uma evolução menos contínua ao longo do dia. Embora os clusters de \textit{Repouso ou Sono} e \textit{Concentração / Carga Cognitiva} apresentem uma ocorrência temporal compatível com os períodos de repouso e de atividade laboral, respetivamente, os restantes agrupamentos encontram-se mais dispersos. Assim, apesar de o modelo permitir distinguir diferentes níveis de atividade e carga fisiológica, a maior variabilidade temporal e a sobreposição entre algumas assinaturas reduzem a consistência da interpretação fisiológica quando comparada com a obtida pelo GMM.
+
+
+\subsubsection{Clustering Hierárquico com janelas de 10 minutos ($k=5$)}
+
+Para os dados agregados em janelas de 10 minutos, o \textit{Clustering Hierárquico Aglomerativo} foi configurado com cinco clusters. A Tabela \ref{tab:percentis_hier_janela} apresenta a assinatura relativa dos agrupamentos obtidos, permitindo identificar estados fisiológicos associados ao repouso, despertar, atividade quotidiana, carga cognitiva e esforço físico.
+
+\begin{center}
+\captionof{table}{Assinatura Fisiológica dos Clusters para o Clustering Hierárquico ($k=5$, Janelas de 10 min)}
+\label{tab:percentis_hier_janela}
+\renewcommand{\arraystretch}{1.4}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c c c c c c c c c c}
+\hline
+\textbf{Cluster} & \textbf{EDA} & \textbf{Pulse Rate} & \textbf{MET} & \textbf{Act. Counts} & \textbf{Step Counts} & \textbf{Vec. Mag.} & \textbf{Act. Intensity} & \textbf{Sleep Stage} & \textbf{Significado Fisiológico Proposto} \\
+\hline
+0 & \textit{HIGH} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{MED} & \textit{LOW} & Concentração e Trabalho / Jornada Principal \\
+1 & \textit{MED} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{LOW} & \textit{HIGH} & Repouso Total / Sono Profundo \\
+2 & \textit{MED} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{LOW} & Movimento Ativo / Caminhadas e Deslocamentos \\
+3 & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & \textit{HIGH} & \textit{LOW} & Picos de Esforço Físico \\
+4 & \textit{LOW} & \textit{MED} & \textit{HIGH} & \textit{MED} & \textit{HIGH} & \textit{MED} & \textit{HIGH} & \textit{HIGH} & O Despertar e Rotinas Matinais \\
+\hline
+\end{tabular}%
+}
+\end{center}
+
+Os agrupamentos apresentam assinaturas fisiológicas diferenciadas. O cluster \textit{Repouso Total / Sono Profundo} caracteriza-se por baixos níveis de atividade e frequência cardíaca, associados a valores elevados de \textit{Sleep Stage}. O cluster \textit{Despertar e Rotinas Matinais} combina maior movimento e gasto energético com uma ativação fisiológica ainda moderada. Durante a atividade quotidiana, o cluster \textit{Movimento Ativo / Caminhadas e Deslocamentos} apresenta valores elevados de MET, passos e intensidade de atividade. Por sua vez, o cluster \textit{Concentração e Trabalho / Jornada Principal} distingue-se principalmente pela EDA elevada e atividade moderada, enquanto os \textit{Picos de Esforço Físico} apresentam os níveis mais elevados de frequência cardíaca e movimento.
+
+A distribuição temporal dos clusters ao longo da jornada é apresentada na Figura \ref{fig:temporal_hier_janela}.
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figs/temporalherarquicojanela.png}
+\captionof{figure}{Distribuição temporal diária dos clusters do Clustering Hierárquico ($k=5$, janelas de 10 min) ao longo de uma jornada.}
+\label{fig:temporal_hier_janela}
+\end{center}
+
+A distribuição temporal evidencia uma organização mais estável dos estados, com blocos relativamente bem definidos ao longo da jornada. Observa-se uma sequência coerente entre o repouso noturno, o despertar, os períodos de atividade e deslocamento, a jornada laboral e os episódios pontuais de maior esforço físico. Comparativamente com o modelo treinado com dados ao minuto, a agregação temporal reduz a alternância entre clusters e favorece uma representação mais contínua do comportamento fisiológico. Este resultado reforça o efeito positivo das janelas temporais na interpretação dos agrupamentos, permitindo que o Clustering Hierárquico represente estados mais consistentes e alinhados com diferentes momentos da rotina diária.
+
+\subsection{Validação externa com dados experimentais}\label{sec:external_validation}
+
+Para complementar a avaliação dos modelos de agrupamento, foi realizado um experimento adicional utilizando dados fisiológicos recolhidos diretamente através de um relógio inteligente em diferentes situações do quotidiano. O objetivo foi verificar se os estados fisiológicos previamente identificados a partir dos dados de treino eram também reconhecidos de forma consistente em dados independentes, não utilizados durante o processo de aprendizagem. Foram consideradas três situações distintas: \textbf{atividade física}, incluindo levantamento de pesos e exercício cardiovascular de elevada intensidade; \textbf{trabalho em computador}, representando uma situação de concentração e carga cognitiva; e \textbf{sono}, correspondente a um período de repouso prolongado. Os dados foram recolhidos nos dias 24 e 25 de abril de 2026, abrangendo aproximadamente duas horas de atividade física, duas horas de trabalho em computador e 5~h~46~min de sono.
+
+Para garantir a consistência entre a fase de treino e a validação externa, os dados experimentais foram submetidos ao mesmo \textit{pipeline} de pré-processamento utilizado na construção de cada modelo. Assim, foram aplicadas as transformações específicas de cada configuração, incluindo tratamento de valores em falta, deteção e tratamento de anomalias e \textit{outliers}, normalização e \textit{scaling}, codificação das variáveis categóricas e, no caso dos modelos GMM, a transformação através de PCA. Após este processamento, os dados foram introduzidos nos quatro modelos previamente treinados: \textbf{GMM} com dados originais ($k=9$), \textbf{GMM} com janelas de 10 minutos ($k=5$), \textbf{Clustering Hierárquico} com dados originais ($k=5$) e \textbf{Clustering Hierárquico} com janelas de 10 minutos ($k=5$). Desta forma, não houve qualquer novo ajuste dos modelos aos dados experimentais, permitindo avaliar diretamente a capacidade de generalização das configurações obtidas anteriormente.
+
+A avaliação foi realizada com base na interpretação fisiológica previamente atribuída a cada \textit{cluster}. Para cada modelo, foram definidos os \textit{clusters} considerados compatíveis com cada atividade experimental. Por exemplo, no GMM com $k=9$, os \textit{clusters} 0 e 5 foram associados ao sono profundo, os \textit{clusters} 3, 4 e 8 à atividade física e os \textit{clusters} 2, 6 e 7 ao trabalho ou concentração. Assim, uma previsão pertencente a qualquer um dos \textit{clusters} esperados para uma determinada atividade foi considerada uma classificação correta, enquanto uma previsão fora desse conjunto foi considerada incorreta. Este procedimento permite transformar a atribuição não supervisionada dos \textit{clusters} numa medida de concordância entre o estado fisiológico esperado e o estado identificado pelo modelo.
+
+Os resultados obtidos evidenciam diferenças importantes entre as configurações avaliadas. Para os dados originais, o GMM apresentou uma \textit{accuracy} de 75,17\% para a atividade física e de 82,64\% para o trabalho em computador, enquanto no período de sono a \textit{accuracy} foi de 46,09\%. No Clustering Hierárquico, observaram-se valores de 59,73\% para a atividade física, 81,82\% para o trabalho em computador e 93,04\% para o sono. Estes resultados mostram que, embora o GMM tenha apresentado uma resposta competitiva na identificação da atividade física e do trabalho, o modelo hierárquico apresentou uma capacidade claramente superior para reconhecer o período de sono.
+
+Nos modelos baseados em janelas temporais de 10 minutos, o GMM apresentou uma \textit{accuracy} de 26,67\% para a atividade física, 76,92\% para o trabalho em computador e 51,43\% para o sono. O Clustering Hierárquico apresentou resultados bastante distintos: 0,00\% para a atividade física, 23,08\% para o trabalho em computador e 100,00\% para o sono. Estes resultados indicam que a agregação temporal não produziu uma melhoria uniforme no reconhecimento das atividades. No caso do sono, a representação em janelas favoreceu claramente o Clustering Hierárquico, que classificou corretamente todas as 35 janelas avaliadas. Por outro lado, a mesma representação apresentou dificuldades significativas na identificação da atividade física e do trabalho em computador, especialmente no modelo hierárquico.
+
+\begin{center}
+\captionof{table}{Accuracy da validação externa para as diferentes configurações dos modelos.}
+\label{tab:external_validation}
+\small
+\begin{tabular*}{.95\textwidth}{@{} p{.34\linewidth} p{.18\linewidth} p{.18\linewidth} p{.16\linewidth} @{}}
+\toprule
+\textbf{Modelo} & \textbf{Atividade física} & \textbf{Trabalho/PC} & \textbf{Sono} \\
+\midrule
+GMM ($k=9$) & 75,17\% & 82,64\% & 46,09\% \\
+Hierárquico ($k=5$) & 59,73\% & 81,82\% & 93,04\% \\
+GMM, janelas ($k=5$) & 26,67\% & 76,92\% & 51,43\% \\
+Hierárquico, janelas ($k=5$) & 0,00\% & 23,08\% & 100,00\% \\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+Em conjunto, esta validação externa mostra que não existe uma configuração única que apresente o melhor desempenho em todas as situações fisiológicas. O \textbf{GMM} com dados originais apresentou o comportamento mais equilibrado para atividade física e trabalho em computador, enquanto o \textbf{Clustering Hierárquico} com dados originais destacou-se na identificação do sono. A representação em janelas de 10 minutos reforçou ainda mais a identificação do estado de repouso no modelo hierárquico, mas prejudicou significativamente a discriminação de atividades de curta duração ou de elevada variabilidade, como o exercício e determinadas situações de trabalho. Estes resultados são particularmente relevantes porque demonstram que a qualidade de um agrupamento não deve ser avaliada exclusivamente através de métricas internas, mas também pela sua capacidade de produzir estados fisiológicos coerentes quando aplicado a dados independentes e experimentalmente controlados.
+
+
+\section{Conclusões e Trabalho Futuro}\label{sec:conclusions}
+
+Este estudo avaliou duas abordagens de aprendizagem não supervisionada, o Gaussian Mixture Model (GMM) e o Clustering Hierárquico Aglomerativo, para identificar estados fisiológicos a partir de sinais recolhidos por um dispositivo vestível de pulso Empatica EmbracePlus. A análise dos dados ao minuto e dos dados agregados em janelas de 10 minutos mostrou que os modelos conseguem distinguir padrões associados ao repouso e ao sono, à atividade diária, à carga cognitiva e ao esforço físico, embora o significado fisiológico dos agrupamentos dependa do algoritmo e da resolução temporal utilizados.
+
+A seleção do número de clusters beneficiou da utilização conjunta de métricas internas, nomeadamente o BIC, o índice de Silhouette, o método do cotovelo e a análise de dendrogramas. Contudo, os resultados também mostraram que estas métricas, consideradas isoladamente, não são suficientes para selecionar uma solução final: a interpretabilidade fisiológica e a coerência temporal dos agrupamentos foram necessárias para evitar soluções excessivamente fragmentadas ou demasiado gerais.
+
+A validação externa confirmou que não existe um modelo ótimo para todas as atividades avaliadas. O desempenho variou de acordo com o estado fisiológico e com a representação temporal. De forma geral, os dados originais conservaram melhor a informação associada a atividades dinâmicas, embora este comportamento não tenha sido uniforme entre os modelos. Em contrapartida, a agregação temporal favoreceu particularmente o Clustering Hierárquico na identificação do sono, mas não constituiu uma vantagem geral para todas as atividades. Assim, as janelas de 10 minutos podem favorecer a representação de estados prolongados, mas também podem atenuar padrões de curta duração ou de elevada variabilidade.
+
+Em conjunto, estes resultados indicam que a avaliação de agrupamentos fisiológicos não deve basear-se exclusivamente no índice de Silhouette ou no WCSS. A validação com dados independentes e experimentalmente controlados fornece uma evidência complementar e mais diretamente relacionada com a utilidade prática dos agrupamentos, permitindo verificar se os estados identificados mantêm significado quando aplicados fora dos dados utilizados no treino. O estudo sustenta, por isso, o potencial de abordagens não supervisionadas para caracterizar estados fisiológicos relevantes para a monitorização da fadiga e para futuros sistemas de apoio à segurança ocupacional, sem constituir ainda uma validação suficiente para a sua utilização operacional autónoma.
+
+A principal limitação reside no âmbito delimitado da validação externa, que contemplou três situações experimentais e um período de recolha restrito. Em trabalhos futuros, será importante avaliar estes modelos em conjuntos de dados maiores e mais diversificados, incluindo diferentes trabalhadores, condições ambientais, tarefas e períodos sazonais. Deverá também ser estudada, de forma prospetiva, a estabilidade das previsões e a sua latência numa eventual integração em plataformas de Gémeo Digital Humano, bem como a possibilidade de adaptação dos modelos a outros contextos industriais.
+
+% Numbered list
+% Use the style of numbering in square brackets.
+% If nothing is used, default style will be taken.
+%\begin{enumerate}[a)]
+%\item 
+%\item 
+%\item 
+%\end{enumerate}  
+
+% Unnumbered list
+%\begin{itemize}
+%\item 
+%\item 
+%\item 
+%\end{itemize}  
+
+% Description list
+%\begin{description}
+%\item[]
+%\item[] 
+%\item[] 
+%\end{description}  
+
+% Uncomment and use as the case may be
+%\begin{theorem} 
+%\end{theorem}
+
+% Uncomment and use as the case may be
+%\begin{lemma} 
+%\end{lemma}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+% To print the credit authorship contribution details
+\printcredits
+
+%% Loading bibliography style file
+%\bibliographystyle{model1-num-names}
+\bibliographystyle{cas-model2-names}
+
+% Loading bibliography database
+\bibliography{cas-refs}
+
+% Biography
+%\bio{}
+% Here goes the biography details.
+%\endbio
+
+%\bio{pic1}
+% Here goes the biography details.
+%\endbio
+
+\end{document}
+
