@@ -1,0 +1,182 @@
+% we include the glossary here (frontmatter is included with \input, so this command is as if it was in main.tex)
+%\input{frontmatter/glossary} % the command makenoidxglossaries requires that the glossary entries must be defined in the preamble (to be compatible with overleaf)
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\maketitlepage
+
+%----------------------------------------------------------------------------------------
+%	STATEMENT OF INTEGRITY
+%----------------------------------------------------------------------------------------
+
+\begin{soi}
+
+Declaro ter conduzido este trabalho acad\'emico com integridade.
+
+N\~ao plagiei ou apliquei qualquer forma de uso indevido de informa\c{c}\~oes ou falsifica\c{c}\~ao de resultados ao longo do processo que levou \`a sua elabora\c{c}\~ao.
+
+Portanto, o trabalho apresentado neste documento \'e original e de minha autoria, n\~ao tendo sido utilizado anteriormente para nenhum outro fim. Durante a elabora\c{c}\~ao desta disserta\c{c}\~ao, foram utilizadas ferramentas de Intelig\^encia Artificial, nomeadamente o GitHub Copilot, exclusivamente como apoio \`a reda\c{c}\~ao, \`a tradu\c{c}\~ao de conte\'udos para portugu\^es e ao aperfei\c{c}oamento lingu\'istico de ideias previamente definidas pelo autor. Estas ferramentas n\~ao foram utilizadas para substituir a autoria, definir a metodologia, produzir os resultados, realizar a an\'alise cient\'ifica ou formular as conclus\~oes do trabalho. O autor manteve a responsabilidade pela sele\c{c}\~ao, verifica\c{c}\~ao e valida\c{c}\~ao de todo o conte\'udo apresentado.
+
+Declaro ainda que tenho pleno conhecimento do C\'odigo de Conduta \'Etica do P.PORTO.
+
+ISEP, Porto, 27 de setembro de 2026
+
+\end{soi}
+
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION  (optional)
+%----------------------------------------------------------------------------------------
+%
+%\dedicatory{For/Dedicated to/To my\ldots}
+\begin{dedicatory}
+\vspace*{\fill}
+\begin{center}
+\textbf{“A perseverança é a virtude pela qual todas as outras virtudes dão o seu fruto.”}
+
+\textit{--- Arturo Graf}
+
+À minha mãe e à minha avó, por serem a minha força, pelo vosso amor incondicional e por me ensinarem a perseverar e a nunca desistir.
+\end{center}
+\vspace*{\fill}
+\end{dedicatory}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+{%
+{\renewcommand{\keywordnames}{Aprendizagem Automática, Gémeo Digital, Modelos Preditivos, Previsão Fisiológica, Tecnologias Emergentes, Trabalhadores de Alto Risco}
+\begin{abstract}
+
+% here you put the abstract in the main language of the work.
+
+Esta dissertação insere-se no âmbito da Inteligência Artificial, com particular enfoque na aplicação de técnicas de aprendizagem automática à monitorização de estados psicofisiológicos em ambientes laborais de alto risco. No contexto da construção civil, onde o desempenho humano assume um papel crítico para a segurança operacional, a crescente complexidade destes ambientes, marcada pela interação entre trabalhadores, máquinas e sistemas inteligentes, reforça a necessidade de soluções capazes de apoiar a monitorização das condições fisiológicas dos trabalhadores.
+
+Neste contexto, e em alinhamento com os princípios da Indústria 5.0, esta dissertação procura avaliar em que medida modelos de aprendizagem automática podem ser utilizados para caracterizar e estimar estados psicofisiológicos relevantes para a segurança, a partir de dados recolhidos por sensores portáteis. Estados como o stress, a fadiga e o cansaço podem não ser conscientemente percecionados pelo próprio trabalhador e constituem fatores relevantes para a ocorrência de situações de risco e acidentes. Para este trabalho, foram analisados dados provenientes da banda Polar H10 e do relógio Empatica EmbracePlus, recorrendo a modelos de aprendizagem supervisionada e a técnicas de agrupamento não supervisionado.
+
+A abordagem proposta explora o conceito de gémeo digital humano, integrando dados fisiológicos em tempo real com modelos preditivos capazes de capturar a dinâmica temporal dos sinais e inferir o estado interno do trabalhador. O objetivo é contribuir para o desenvolvimento de sistemas de monitorização inteligentes e centrados no ser humano, que apoiem a prevenção de riscos laborais e a tomada de decisão em tempo real em contextos de elevada exigência operacional.
+
+\end{abstract}
+}%
+
+{%
+\renewcommand{\keywordnames}{Digital Twin, Emerging Technologies, High-Risk Workers, Machine Learning, Physiological Prediction, Predictive Models}
+\begin{abstractotherlanguage}
+% here you put the abstract in the "other language": English, if the work is written in Portuguese; Portuguese, if the work is written in English.
+
+This dissertation falls within the field of Artificial Intelligence, with a particular focus on the application of machine learning techniques to the monitoring of psychophysiological states in high-risk work environments. In the context of construction, where human performance plays a critical role in operational safety, the increasing complexity of these environments, characterized by the interaction between workers, machinery, and intelligent systems, reinforces the need for solutions capable of supporting the monitoring of workers’ physiological conditions.
+
+In this context, and in alignment with Industry 5.0 principles, this dissertation seeks to assess the extent to which machine learning models can be used to characterize and estimate psychophysiological states relevant to safety, based on data collected by wearable sensors. States such as stress, fatigue, and tiredness may not be consciously perceived by the worker and are relevant factors in the occurrence of risk situations and accidents. For this work, data from the Polar H10 chest strap and the Empatica EmbracePlus watch were analyzed using supervised learning models and unsupervised clustering techniques.
+
+The proposed approach explores the concept of the human digital twin by integrating real-time physiological data with predictive models capable of capturing the temporal dynamics of signals and inferring the worker's internal state. The objective is to contribute to the development of intelligent, human-centered monitoring systems that support the prevention of occupational risks and real-time decision-making in demanding operational contexts.
+
+\end{abstractotherlanguage}
+}%
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS (optional)
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+Em primeiro lugar, gostaria de expressar a minha profunda gratidão ao Professor Diogo Martinho, pela orientação, paciência e pelo acompanhamento constante ao longo de toda esta dissertação. Os seus conhecimentos e disponibilidade foram fundamentais para superar os desafios técnicos e científicos deste trabalho. Deixo ainda uma palavra de agradecimento a todos os docentes que, de alguma forma, contribuíram para a minha formação académica, especialmente ao longo destes dois últimos anos no Instituto Superior de Engenharia do Porto (ISEP).
+
+Estendo o meu agradecimento ao GECAD, centro de investigação do ISEP, pelo ambiente de partilha e colaboração que me proporcionou. Foi neste espaço que encontrei não apenas os recursos e o conhecimento necessários para o desenvolvimento deste projeto, mas também colegas e amigos que tornaram a experiência de investigação muito mais enriquecedora e estimulante.
+
+Gostaria também de expressar o meu profundo agradecimento ao projeto CRIARTE e a todos os seus integrantes, pela oportunidade de trabalhar com uma equipa multidisciplinar de profissionais e especialistas em Engenharia e noutras áreas. Os conhecimentos partilhados, o apoio prestado e a possibilidade de contribuir para um projeto com um potencial tão significativo foram fundamentais para o meu desenvolvimento académico e profissional. Agradeço, em particular, à Garcia, Garcia, S.A., parceira da equipa do CRIARTE, que dirigiu os cenários de simulação e recolheu grande parte dos dados fisiológicos posteriormente utilizados neste trabalho de investigação. O seu apoio, disponibilidade e contributos foram fundamentais para a realização desta dissertação.
+
+Por fim, à minha família, dedico um agradecimento especial pelo apoio incondicional. Mesmo sem dominarem a área técnica do meu trabalho, o interesse constante e o incentivo que demonstraram em cada fase foram o combustível necessário para continuar. Agradeço de forma especial à minha mãe e à minha avó por serem o meu porto seguro, por acreditarem em mim mesmo nos momentos de maior incerteza e por me ajudarem a perseverar sempre. Sem o vosso amor e paciência, esta conquista não seria possível. Esta dissertação também é vossa.
+\end{acknowledgements}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Prints the main table of contents
+
+\listoffigures % Prints the list of figures
+
+\listoftables % Prints the list of tables
+
+\iflanguage{portuguese}{
+\renewcommand{\listalgorithmname}{Lista de Algoritmos}
+}
+\listofalgorithms % Prints the list of algorithms
+\addchaptertocentry{\listalgorithmname}
+
+
+\renewcommand{\lstlistlistingname}{List of Source Code}
+\iflanguage{portuguese}{
+\renewcommand{\lstlistlistingname}{Lista de C\'odigo}
+}
+\lstlistoflistings % Prints the list of listings (programming language source code)
+\addchaptertocentry{\lstlistlistingname}
+
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+%\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+%%\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere\\
+%%\textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
+%\end{abbreviations}
+
+%----------------------------------------------------------------------------------------
+%\tSYMBOLS
+%----------------------------------------------------------------------------------------
+
+\begin{symbols}{@{}p{0.18\textwidth} p{0.76\textwidth}@{}}
+\textbf{Símbolo} & \textbf{Descrição} \\
+\hline
+$x$ & Valor original de uma característica numa janela temporal \\
+$z$ & Valor estandardizado (\textit{z-score}) \\
+$\mu$ & Média de uma característica \\
+$\sigma$ & Desvio padrão de uma característica \\
+$\mu_{\mathrm{baseline}}$ & Média da característica no período de referência \\
+$\sigma_{\mathrm{baseline}}$ & Desvio padrão da característica no período de referência \\
+$x_{i,f}$ & Valor da característica $f$ na janela $i$ \\
+$\mu_{w,f}$ & Média da característica $f$ no baseline do trabalhador $w$ \\
+$\sigma_{w,f}$ & Desvio padrão da característica $f$ no baseline do trabalhador $w$ \\
+$i$ & Índice da janela temporal \\
+$f$ & Índice da característica fisiológica ou temporal \\
+$w$ & Índice do trabalhador \\
+$C$ & Parâmetro de regularização do SVM e da regressão logística \\
+$\gamma$ & Coeficiente do kernel do SVM \\
+$\epsilon$ & Margem de tolerância do SVR \\
+$R^2$ & Coeficiente de determinação \\
+$k$ & Número de clusters \\
+$K$ & Número de classes \\
+$j$ & Índice da característica avaliada \\
+$\beta_{k,j}$ & Coeficiente da característica $j$ na classe $k$ \\
+$S$ & \textit{Balanced accuracy} do modelo \\
+$I_j$ & Importância da característica $j$ \\
+\end{symbols}
+
+%----------------------------------------------------------------------------------------
+%\tACRONYMS
+%----------------------------------------------------------------------------------------
+
+\newcommand{\listacronymname}{List of Acronyms}
+\iflanguage{portuguese}{
+\renewcommand{\listacronymname}{Lista de Acr\'onimos}
+}
+
+%Use GLS
+\glsresetall
+\glsaddall
+
+%\printglossary[title=\listacronymname,type=\acronymtype,style=long]
+\printnoidxglossary[title=\listacronymname,type=\acronymtype,style=long] % command compatible with overleaf
+
+%----------------------------------------------------------------------------------------
+%	DONE
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
